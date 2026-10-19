@@ -1,0 +1,326 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          background: "#0A100D",
+          surface: "#0E1612",
+          "surface-container": "#132018",
+          "surface-container-low": "#101B15",
+          "surface-container-high": "#192B21",
+          "surface-container-highest": "#22382B",
+          "surface-bright": "#274233",
+          "surface-border": "#1D3326",
+          "surface-border-light": "rgba(52, 211, 153, 0.18)",
+          primary: "#34D399",
+          "primary-bright": "#10B981",
+          "primary-glow": "#059669",
+          "primary-container": "#10B981",
+          "on-primary": "#042F1A",
+          secondary: "#6EE7B7",
+          "secondary-container": "#183928",
+          "on-secondary": "#022C17",
+          tertiary: "#A7F3D0",
+          "tertiary-container": "#047857",
+          "on-surface": "#F0FDF4",
+          "on-surface-variant": "#86A795",
+          "accent-mint": "#34D399",
+          "bio-green": "#22C55E",
+          outline: "#2E4E3B",
+          "outline-variant": "#1A2E22"
+        },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+          lg: "1.25rem",
+          xl: "1.75rem",
+          full: "9999px"
+        },
+        spacing: {
+          "gutter-mobile": "1rem",
+          "space-xl": "2.5rem",
+          "margin-mobile": "1rem",
+          margin: "2rem",
+          "space-md": "1rem",
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          gutter: "1.5rem",
+          "space-lg": "1.5rem"
+        },
+        fontFamily: {
+          headline: ["Plus Jakarta Sans", "Space Grotesk", "sans-serif"],
+          body: ["Inter", "sans-serif"],
+          mono: ["Space Grotesk", "monospace"]
+        }
+      }
+    }
+  };
+</script><style>@layer base{html,body{width:100vw;min-height:100vh;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-background text-on-surface font-body text-sm antialiased selection:bg-primary/20 flex flex-col min-h-screen relative overflow-x-hidden">
+<!-- Medixal Ambient Radial Glows -->
+<div class="fixed top-0 left-1/2 -translate-x-1/2 w-[380px] h-[340px] bg-gradient-to-b from-primary/15 via-primary-glow/8 to-transparent blur-[100px] pointer-events-none z-0"></div>
+<div class="fixed bottom-24 right-[-40px] w-[260px] h-[260px] bg-primary/10 blur-[90px] pointer-events-none z-0"></div>
+<header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl border-b border-surface-border-light"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-primary-bright to-emerald-700 p-[1px] flex items-center justify-center shadow-[0_0_15px_rgba(52,211,153,0.35)]"><div class="w-full h-full bg-surface-container rounded-[11px] flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]">ecg_heart</span></div></div><div class="flex flex-col truncate"><div class="flex items-center gap-1.5"><span class="font-headline text-base font-bold text-on-surface tracking-tight truncate">MindSync AI</span><span class="inline-flex w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span></div><span class="font-mono text-[11px] text-on-surface-variant tracking-wider uppercase">Analytics • Today</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high/90 border border-primary/20 shadow-[0_0_12px_rgba(52,211,153,0.1)]"><span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span><span class="font-headline text-xs text-primary font-bold">14</span></div><a class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high border border-surface-border transition-colors" data-path="settings-profile" href="#"><div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary/30 to-surface-container-highest border border-primary/40 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[18px]">person</span></div></a></div></div></header><main class="flex-1 w-full pt-20 pb-28 relative z-10"><div class="flex flex-col w-full px-gutter-mobile gap-space-md">
+<!-- Ambient Aurora Glow Anchor / Hero Greeting (Medixal Medical-Tech Style) -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-b from-surface-container to-surface-container-low p-space-md border border-surface-border-light shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+<div class="absolute -top-12 -right-8 w-44 h-44 bg-gradient-to-br from-primary/25 to-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-8 -left-8 w-36 h-36 bg-primary-glow/15 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-mono text-[11px] uppercase tracking-wider font-semibold">Neural Link Active</span>
+</div>
+<span class="font-mono text-[11px] text-on-surface-variant/80">MEDIXAL CORE v2.4</span>
+</div>
+<h2 class="font-headline text-2xl font-bold text-on-surface tracking-tight mt-1">Welcome back, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#BEF264] to-[#A3E635] drop-shadow-[0_0_12px_rgba(190,242,100,0.35)]">Alex.</span></h2>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Ready to sync your AI knowledge &amp; cognitive biomarkers today?</p>
+</div>
+</div>
+<!-- Daily Progress Radial Gauge Card (Medixal Vital Style) -->
+<div class="relative rounded-2xl bg-surface-container p-space-md border border-surface-border-light shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex flex-col gap-space-md overflow-hidden">
+<!-- Medixal light bleed -->
+<div class="absolute -top-20 -left-20 w-52 h-52 bg-primary/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary/10 border border-primary/25 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[17px]">sync_saved_locally</span>
+</div>
+<div>
+<span class="font-headline text-sm text-on-surface font-semibold tracking-tight block">Daily Focus <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#BEF264] to-emerald-400 font-bold">Cadence</span></span>
+<span class="font-mono text-[11px] text-on-surface-variant block">Target: 45 min deep sync</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary"><span class="material-symbols-outlined text-[14px] text-[#BEF264] drop-shadow-[0_0_6px_rgba(190,242,100,0.5)]" style="font-variation-settings: &quot;FILL&quot; 1;">bolt</span><span class="font-headline text-xs font-bold text-[#BEF264]">14 Days Active</span><span class="font-mono text-[10px] text-on-surface-variant pl-0.5">(Best: 21)</span></div>
+</div>
+<!-- Gauge Ring & Metric Center -->
+<div class="relative z-10 flex flex-col sm:flex-row items-center justify-around gap-space-md py-space-xs">
+<div class="relative w-44 h-44 flex items-center justify-center">
+<!-- SVG Medixal Vibrant Emerald/Mint Radial Gauge -->
+<svg class="w-full h-full -rotate-90 transform" viewBox="0 0 120 120">
+<defs>
+<linearGradient id="medixalGauge" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#10B981"></stop>
+<stop offset="50%" stop-color="#34D399"></stop>
+<stop offset="100%" stop-color="#A7F3D0"></stop>
+</linearGradient>
+<filter height="140%" id="gaugeGlow" width="140%" x="-20%" y="-20%">
+<feGaussianBlur in="SourceGraphic" stdDeviation="2.5"></feGaussianBlur>
+<feMerge>
+<feMergeNode></feMergeNode>
+<feMergeNode in="SourceGraphic"></feMergeNode>
+</feMerge>
+</filter>
+</defs>
+<!-- Track with tech dash styling -->
+<circle class="text-surface-container-highest/60" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-width="8"></circle>
+<!-- Progress: circumference = 2 * PI * 50 = 314.159. 78% = 314.159 * (1 - 0.777) = ~70 offset -->
+<circle cx="60" cy="60" fill="none" filter="url(#gaugeGlow)" r="50" stroke="url(#medixalGauge)" stroke-dasharray="314.159" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<!-- Center Dial Metric (Medixal Vital Score Typography) -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-headline text-3xl text-on-surface font-extrabold tracking-tight">35<span class="font-mono text-sm text-on-surface-variant font-normal"> / 45m</span></span>
+<div class="inline-flex items-center gap-1 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-mono text-[11px] text-primary font-bold tracking-widest">78% SYNCED</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center sm:items-start gap-2 text-center sm:text-left">
+<div class="inline-flex items-center gap-1.5 text-primary text-xs font-semibold">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">10 mins remaining</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant max-w-[210px] leading-relaxed">Maintain your cadence to unlock your daily cognitive checkpoint.</p>
+<button class="mt-2 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-bright via-primary to-secondary text-on-primary font-headline font-bold text-xs shadow-[0_0_20px_rgba(52,211,153,0.35)] hover:shadow-[0_0_26px_rgba(52,211,153,0.5)] active:scale-95 transition-all" id="focusTimerTrigger">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+<span class="">Start Focus Timer</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Topic of the Day Card (Medixal Featured Diagnostic Blueprint) -->
+<div class="relative rounded-2xl bg-surface-container p-space-md border border-surface-border-light shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex flex-col gap-space-sm overflow-hidden">
+<div class="absolute -top-16 -right-16 w-40 h-40 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-primary/10 border border-[#BEF264]/40 text-[#BEF264] font-mono text-[11px] font-bold tracking-wider uppercase shadow-[0_0_12px_rgba(190,242,100,0.15)]">Advanced GenAI</span>
+<span class="flex items-center gap-1 text-on-surface-variant font-mono text-[11px]">
+<span class="material-symbols-outlined text-[13px] text-primary">schedule</span> 20 min
+        </span>
+</div>
+<div class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+</div>
+</div>
+<!-- Editorial Thumbnail Mock -->
+<div class="relative w-full h-36 rounded-xl bg-surface-container-high overflow-hidden mt-1 border border-surface-border">
+<img class="w-full h-full object-cover filter contrast-105" data-alt="Futuristic luminous network of glowing autonomous agents interacting across radiant isometric circuit grids, obsidian dark tech atmosphere, soft violet and cyan aurora light trails." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD45Dk71wkBGcUjkd6TJs5vPAnbfwVhwD650vCYyTsFPMQj2wZdhrXSzctk4wezcc1rhk1dZg0nC1zkE_SG1sMkEn3h5yNf2fm5r9XbRJAnSt-117lK5FurXjb-au-SnlBltyQCDe_lykWPtFp5G3ToLOy4Dxn4HeIjUjARP-pPHomfNj6jdwNFmq7uXnQaudoLxsezq0n5EjmiF8FWop3LW3op8wRo2sLr5Xar6pfxnU3qMrPutfdm">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent"></div>
+<div class="absolute bottom-2.5 left-3 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-background/80 backdrop-blur-md border border-primary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-mono text-[10px] text-on-surface font-semibold tracking-wider uppercase">Featured Blueprint</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 pt-1">
+<h3 class="font-headline text-base font-bold text-on-surface tracking-tight">Agentic <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#BEF264] to-[#A3E635] drop-shadow-[0_0_10px_rgba(190,242,100,0.3)]">Workflows</span> &amp; Multi-Agent Orchestration</h3>
+<p class="font-body text-xs text-on-surface-variant line-clamp-2 leading-relaxed">Explore autonomous task loops, LangGraph state management, and real-time reflection models powering next-generation agent swarms.</p>
+</div>
+<div class="pt-2 flex items-center gap-2">
+<button class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-gradient-to-r from-primary-bright to-primary text-on-primary font-headline font-bold text-xs shadow-[0_0_18px_rgba(52,211,153,0.3)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">neurology</span>
+<span class="">Launch Study Session</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-high border border-surface-border text-on-surface flex items-center justify-center hover:bg-surface-bright hover:border-primary/30 active:scale-95 transition-colors">
+<span class="material-symbols-outlined text-[19px] text-on-surface-variant hover:text-primary">bookmark_border</span>
+</button>
+</div>
+</div>
+<!-- Quick Stats Row (3 Micro-Metric Tiles with Medixal KPI style) -->
+<div class="grid grid-cols-3 gap-2">
+<!-- Stat 1 -->
+<div class="rounded-xl bg-surface-container p-3 flex flex-col justify-between border border-surface-border-light shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-mono text-[11px] font-semibold uppercase tracking-wider">Time</span>
+<span class="material-symbols-outlined text-[15px] text-primary">timelapse</span>
+</div>
+<div class="my-1.5">
+<span class="font-headline text-lg text-on-surface font-bold tracking-tight">42.5</span>
+<span class="font-mono text-[10px] text-on-surface-variant block uppercase">hours total</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-glow to-primary h-full w-[82%]"></div>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="rounded-xl bg-surface-container p-3 flex flex-col justify-between border border-surface-border-light shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-mono text-[11px] font-semibold uppercase tracking-wider">Topics</span>
+<span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+</div>
+<div class="my-1.5">
+<span class="font-headline text-lg text-on-surface font-bold tracking-tight">18 <span class="font-mono text-xs text-on-surface-variant font-normal">/64</span></span>
+<span class="font-mono text-[10px] text-on-surface-variant block uppercase">mastered</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-glow to-secondary h-full w-[28%]"></div>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="rounded-xl bg-surface-container p-3 flex flex-col justify-between border border-surface-border-light shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-mono text-[11px] font-semibold uppercase tracking-wider">Rank</span>
+<span class="material-symbols-outlined text-[15px] text-primary">military_tech</span>
+</div>
+<div class="my-1.5">
+<span class="font-headline text-xs text-on-surface font-bold block truncate">Lvl 4: Architect</span>
+<span class="font-mono text-[10px] text-primary block">2,450 XP</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-glow to-primary h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+<!-- Quick Log Trigger Card (Medixal Diagnostic Pill Style) -->
+<div class="rounded-2xl bg-surface-container-low p-space-md border border-surface-border-light shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">add_task</span>
+<span class="font-headline text-sm text-on-surface font-semibold tracking-tight">Quick Time Log</span>
+</div>
+<span class="font-mono text-[10px] text-[#BEF264] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#BEF264]/10 border border-[#BEF264]/30 shadow-[0_0_8px_rgba(190,242,100,0.15)]">Manual Input</span>
+</div>
+<!-- Topic Selector Pill Bar -->
+<div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar">
+<button class="topic-pill px-3 py-1 rounded-full bg-primary/15 border border-primary text-primary font-headline font-semibold text-xs whitespace-nowrap transition-all shadow-[0_0_10px_rgba(52,211,153,0.15)]">
+        Agentic Workflows
+      </button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant font-headline font-semibold text-xs whitespace-nowrap hover:text-on-surface transition-all">
+        Transformer Attention
+      </button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant font-headline font-semibold text-xs whitespace-nowrap hover:text-on-surface transition-all">
+        RAG Vector Synthesis
+      </button>
+</div>
+<!-- Quick Presets with Medixal Mint styling -->
+<div class="flex items-center gap-2 pt-1">
+<button class="log-preset-btn flex-1 py-2 rounded-xl bg-surface-container-high border border-surface-border hover:border-primary/40 hover:bg-surface-bright text-on-surface font-mono font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px] text-primary">add</span>
+<span class="">15m</span>
+</button>
+<button class="log-preset-btn flex-1 py-2 rounded-xl bg-surface-container-high border border-surface-border hover:border-primary/40 hover:bg-surface-bright text-on-surface font-mono font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px] text-primary">add</span>
+<span class="">30m</span>
+</button>
+<button class="log-preset-btn flex-1 py-2 rounded-xl bg-surface-container-high border border-surface-border hover:border-primary/40 hover:bg-surface-bright text-on-surface font-mono font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px] text-primary">add</span>
+<span class="">45m</span>
+</button>
+</div>
+<!-- Dynamic feedback toast inside module -->
+<div class="hidden flex items-center gap-2 text-primary font-mono text-xs bg-primary/15 border border-primary/30 px-3 py-1.5 rounded-xl shadow-[0_0_12px_rgba(52,211,153,0.2)]" id="quickLogSuccess">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span id="quickLogMessage" class="">Logged 15m to Agentic Workflows</span>
+</div>
+</div>
+<script>
+    (function initDashboardMicroInteractions() {
+      const presets = document.querySelectorAll('.log-preset-btn');
+      const topicPills = document.querySelectorAll('.topic-pill');
+      const toast = document.getElementById('quickLogSuccess');
+      const toastMsg = document.getElementById('quickLogMessage');
+      let selectedTopic = 'Agentic Workflows';
+
+      // Preset Topic Active State
+      topicPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          topicPills.forEach(p => {
+            p.classList.remove('bg-primary/15', 'border-primary', 'text-primary', 'shadow-[0_0_10px_rgba(52,211,153,0.15)]');
+            p.classList.add('bg-surface-container-high', 'border-surface-border', 'text-on-surface-variant');
+          });
+          pill.classList.remove('bg-surface-container-high', 'border-surface-border', 'text-on-surface-variant');
+          pill.classList.add('bg-primary/15', 'border-primary', 'text-primary', 'shadow-[0_0_10px_rgba(52,211,153,0.15)]');
+          selectedTopic = pill.textContent.trim();
+        });
+      });
+
+      // Quick Preset Action
+      presets.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const duration = btn.textContent.trim();
+          toastMsg.textContent = `Logged ${duration} to ${selectedTopic}`;
+          toast.classList.remove('hidden');
+          setTimeout(() => {
+            toast.classList.add('hidden');
+          }, 3200);
+        });
+      });
+
+      // Focus timer button click ripple
+      const timerBtn = document.getElementById('focusTimerTrigger');
+      if (timerBtn) {
+        timerBtn.addEventListener('click', () => {
+          timerBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px] animate-spin">refresh</span>
+            <span>Syncing Session...</span>
+          `;
+          setTimeout(() => {
+            timerBtn.innerHTML = `
+              <span class="material-symbols-outlined text-[18px]">pause</span>
+              <span>Focus Active (25:00)</span>
+            `;
+          }, 1000);
+        });
+      }
+    })();
+  </script>
+</div></main>
+<!-- Bottom Nav (Medixal Floating Pill Capsule) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none" data-active-classes="text-primary"><div class="px-gutter-mobile pb-space-sm pointer-events-auto"><div class="relative mx-auto max-w-md h-16 rounded-full bg-surface-container/90 backdrop-blur-2xl border border-surface-border-light shadow-[0_8px_32px_rgba(0,0,0,0.7),0_0_24px_rgba(52,211,153,0.12)] flex items-center justify-between px-space-xs"><a aria-current="page" class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full transition-colors text-primary" data-path="today" href="#"><span class="material-symbols-outlined text-[22px]">timer</span><span class="font-headline font-semibold text-[11px] mt-0.5">Today</span></a><a class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="roadmap" href="#"><span class="material-symbols-outlined text-[22px]">alt_route</span><span class="font-headline font-semibold text-[11px] mt-0.5">Roadmap</span></a><div class="flex items-center justify-center px-1"><a class="w-12 h-12 rounded-full bg-gradient-to-tr from-primary-bright via-primary to-secondary flex items-center justify-center shadow-[0_0_20px_rgba(52,211,153,0.45)] hover:shadow-[0_0_28px_rgba(52,211,153,0.7)] active:scale-95 transition-all text-on-primary min-w-[44px] min-h-[44px]" data-path="quick-log" href="#"><span class="material-symbols-outlined text-[24px]">add</span></a></div><a class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="analytics" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-headline font-semibold text-[11px] mt-0.5">Analytics</span></a><a class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="logs" href="#"><span class="material-symbols-outlined text-[22px]">edit_note</span><span class="font-headline font-semibold text-[11px] mt-0.5">Logs</span></a></div></div></nav>
+
+</body></html>

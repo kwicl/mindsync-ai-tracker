@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="MindSync AI"/>
+  <title>MindSync AI Tracker — Medical Clinical Intelligence</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            background: "#0A100D",
+            surface: "#0E1612",
+            "surface-dim": "#101510",
+            "surface-container": "#132018",
+            "surface-container-lowest": "#0a0f0b",
+            "surface-container-low": "#101B15",
+            "surface-container-high": "#192B21",
+            "surface-container-highest": "#22382B",
+            "surface-bright": "#274233",
+            "surface-border": "#1D3326",
+            "surface-border-light": "rgba(52, 211, 153, 0.18)",
+            primary: "#34D399",
+            "primary-bright": "#10B981",
+            "primary-glow": "#059669",
+            "primary-container": "#10B981",
+            "on-primary": "#042F1A",
+            secondary: "#6EE7B7",
+            "secondary-container": "#183928",
+            "on-secondary": "#022C17",
+            tertiary: "#A7F3D0",
+            "tertiary-container": "#047857",
+            "on-surface": "#F0FDF4",
+            "on-surface-variant": "#86A795",
+            "accent-mint": "#34D399",
+            "bio-green": "#22C55E",
+            outline: "#2E4E3B",
+            "outline-variant": "#1A2E22",
+            "lime-accent": "#BEF264"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "Plus Jakarta Sans", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["Space Grotesk", "monospace"]
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1.25rem",
+            xl: "1.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            "gutter-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "margin-mobile": "1rem",
+            margin: "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            gutter: "1.5rem",
+            "space-lg": "1.5rem"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html, body {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #0A100D;
+        color: #F0FDF4;
+      }
+      body { overscroll-behavior: none; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 1rem); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0.5rem); }
+    }
+    ::-webkit-scrollbar { display: none; }
+    * { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Ambient Glow Animations */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.08); }
+    }
+    .ambient-glow {
+      animation: pulse-slow 8s infinite ease-in-out;
+    }
+
+    /* View Switcher Transition */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Device frame wrapper mode */
+    body.device-view {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at 50% 20%, #13251c 0%, #060a08 100%);
+      padding: 24px 16px;
+    }
+    body.device-view #app-container {
+      max-width: 412px;
+      height: 870px;
+      border-radius: 44px;
+      border: 6px solid #23362b;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9), 0 0 35px rgba(52,211,153,0.18);
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body text-sm antialiased selection:bg-primary/20 flex flex-col min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Radial Glows -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[420px] h-[360px] bg-gradient-to-b from-primary/15 via-primary-glow/8 to-transparent blur-[110px] pointer-events-none z-0 ambient-glow"></div>
+  <div class="fixed bottom-24 right-[-40px] w-[300px] h-[300px] bg-primary/10 blur-[90px] pointer-events-none z-0"></div>
+
+  <!-- Top Simulator Bar (Desktop Floating Switcher) -->
+  <div id="desktop-toolbar" class="hidden md:flex fixed top-3 right-5 z-50 items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container/90 backdrop-blur-xl border border-surface-border-light shadow-xl text-xs">
+    <span class="text-on-surface-variant font-mono text-[11px] flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      MindSync Core v2.4
+    </span>
+    <span class="text-surface-border">|</span>
+    <button id="toggle-frame-btn" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface text-[11px] font-mono transition-colors flex items-center gap-1">
+      <span class="material-symbols-outlined text-[14px]">devices</span>
+      <span id="frame-label">Vue Mobile</span>
+    </button>
+    <button onclick="downloadBackup()" class="px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30 hover:bg-primary/25 text-primary text-[11px] font-mono transition-colors flex items-center gap-1">
+      <span class="material-symbols-outlined text-[14px]">download</span>
+      <span>Export JSON</span>
+    </button>
+  </div>
+
+  <div id="app-container" class="w-full flex-1 flex flex-col relative z-10 max-w-2xl mx-auto">
+
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 w-full z-40 pt-safe bg-surface/85 backdrop-blur-xl border-b border-surface-border-light">
+      <div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm">
+        <div class="flex items-center gap-space-sm min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-primary-bright to-emerald-700 p-[1px] flex items-center justify-center shadow-[0_0_15px_rgba(52,211,153,0.35)]">
+            <div class="w-full h-full bg-surface-container rounded-[11px] flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-[20px] material-symbols-fill">ecg_heart</span>
+            </div>
+          </div>
+          <div class="flex flex-col truncate">
+            <div class="flex items-center gap-1.5">
+              <span class="font-headline text-base font-bold text-on-surface tracking-tight truncate">MindSync AI</span>
+              <span class="inline-flex w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            </div>
+            <span id="header-subtitle" class="font-mono text-[11px] text-on-surface-variant tracking-wider uppercase">Analytics • Today</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Streak Indicator -->
+          <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high/90 border border-primary/20 shadow-[0_0_12px_rgba(52,211,153,0.1)]">
+            <span class="material-symbols-outlined text-[16px] text-primary material-symbols-fill">local_fire_department</span>
+            <span id="streak-counter" class="font-headline text-xs text-primary font-bold">14</span>
+          </div>
+
+          <!-- XP Badge Quick View -->
+          <button onclick="switchTab('analytics')" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high border border-surface-border transition-colors">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary/30 to-surface-container-highest border border-primary/40 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-[18px]">person</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY CONTENT (TABS) -->
+    <main class="flex-1 w-full pt-4 pb-28 px-gutter-mobile">
+
+      <!-- ========================================== -->
+      <!-- TAB 1: TODAY DASHBOARD                     -->
+      <!-- ========================================== -->
+      <section id="tab-today" class="tab-pane active flex flex-col gap-space-md">
+        
+        <!-- Ambient Greeting Card -->
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-b from-surface-container to-surface-container-low p-space-md border border-surface-border-light shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+          <div class="absolute -top-12 -right-8 w-44 h-44 bg-gradient-to-br from-primary/25 to-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-8 -left-8 w-36 h-36 bg-primary-glow/15 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                <span class="font-mono text-[11px] uppercase tracking-wider font-semibold">Neural Link Active</span>
+              </div>
+              <span class="font-mono text-[11px] text-on-surface-variant/80">MEDIXAL CORE v2.4</span>
+            </div>
+            <h2 class="font-headline text-2xl font-bold text-on-surface tracking-tight mt-1">
+              Welcome back, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#BEF264] to-[#A3E635] drop-shadow-[0_0_12px_rgba(190,242,100,0.35)]">Alex.</span>
+            </h2>
+            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+              Ready to sync your AI knowledge &amp; cognitive biomarkers today?
+            </p>
+          </div>
+        </div>
+
+        <!-- Daily Focus Cadence Radial Gauge Card -->
+        <div class="relative rounded-2xl bg-surface-container p-space-md border border-surface-border-light shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex flex-col gap-space-md overflow-hidden">
+          <div class="absolute -top-20 -left-20 w-52 h-52 bg-primary/15 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="relative z-10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 border border-primary/25 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[17px]">sync_saved_locally</span>
+              </div>
+              <div>
+                <span class="font-headline text-sm text-on-surface font-semibold tracking-tight block">
+                  Daily Focus <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#BEF264] to-emerald-400 font-bold">Cadence</span>
+                </span>
+                <span class="font-mono text-[11px] text-on-surface-variant block">Target: 45 min deep sync</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary">
+              <span class="material-symbols-outlined text-[14px] text-[#BEF264] drop-shadow-[0_0_6px_rgba(190,242,100,0.5)] material-symbols-fill">bolt</span>
+              <span class="font-headline text-xs font-bold text-[#BEF264]">14 Days Active</span>
+              <span class="font-mono text-[10px] text-on-surface-variant pl-0.5">(Best: 21)</span>
+            </div>
+          </div>
+
+          <!-- Gauge Ring & Metric Center -->
+          <div class="relative z-10 flex flex-col sm:flex-row items-center justify-around gap-space-md py-space-xs">
+            <div class="relative w-44 h-44 flex items-center justify-center">
+              <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 120 120">
+                <defs>
+                  <linearGradient id="medixalGauge" x1="0%" x2="100%" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="#10B981"></stop>
+                    <stop offset="50%" stop-color="#34D399"></stop>
+                    <stop offset="100%" stop-color="#BEF264"></stop>
+                  </linearGradient>
+                  <filter height="140%" id="gaugeGlow" width="140%" x="-20%" y="-20%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"></feGaussianBlur>
+                    <feMerge>
+                      <feMergeNode></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <circle class="text-surface-container-highest/60" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-width="8"></circle>
+                <!-- Circumference = 314.159. 35/45 = 77.7% => offset ~ 70 -->
+                <circle id="gauge-progress-circle" cx="60" cy="60" fill="none" filter="url(#gaugeGlow)" r="50" stroke="url(#medixalGauge)" stroke-dasharray="314.159" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8" class="transition-all duration-700"></circle>
+              </svg>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span id="gauge-minutes-text" class="font-headline text-3xl text-on-surface font-extrabold tracking-tight">
+                  35<span class="font-mono text-sm text-on-surface-variant font-normal"> / 45m</span>
+                </span>
+                <div class="inline-flex items-center gap-1 mt-0.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  <span id="gauge-percentage-text" class="font-mono text-[11px] text-primary font-bold tracking-widest">78% SYNCED</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col items-center sm:items-start gap-2 text-center sm:text-left">
+              <div class="inline-flex items-center gap-1.5 text-primary text-xs font-semibold">
+                <span class="material-symbols-outlined text-[16px]">schedule</span>
+                <span id="time-remaining-label">10 mins remaining</span>
+              </div>
+              <p class="font-body text-xs text-on-surface-variant max-w-[210px] leading-relaxed">
+                Maintain your cadence to unlock your daily cognitive checkpoint.
+              </p>
+              <button onclick="openFocusTimer()" class="mt-2 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-bright via-primary to-secondary text-on-primary font-headline font-bold text-xs shadow-[0_0_20px_rgba(52,211,153,0.35)] hover:shadow-[0_0_26px_rgba(52,211,153,0.5)] active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                <span>Start Focus Timer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Blueprint Card -->
+        <div class="relative rounded-2xl bg-surface-container p-space-md border border-surface-border-light shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex flex-col gap-space-sm overflow-hidden">
+          <div class="absolute -top-16 -right-16 w-40 h-40 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-full bg-primary/10 border border-[#BEF264]/40 text-[#BEF264] font-mono text-[11px] font-bold tracking-wider uppercase shadow-[0_0_12px_rgba(190,242,100,0.15)]">Advanced GenAI</span>
+              <span class="flex items-center gap-1 text-on-surface-variant font-mono text-[11px]">
+                <span class="material-symbols-outlined text-[13px] text-primary">schedule</span> 20 min
+              </span>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+            </div>
+          </div>
+
+          <div class="relative w-full h-36 rounded-xl bg-surface-container-high overflow-hidden mt-1 border border-surface-border">
+            <div class="w-full h-full bg-gradient-to-br from-emerald-950 via-[#102318] to-surface-container-high flex items-center justify-center relative">
+              <div class="absolute inset-0 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:16px_16px] opacity-25"></div>
+              <div class="relative z-10 flex flex-col items-center">
+                <span class="material-symbols-outlined text-4xl text-primary animate-pulse">neurology</span>
+                <span class="text-xs font-mono text-emerald-300 mt-1">Autonomous Multi-Agent Loops</span>
+              </div>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent"></div>
+            <div class="absolute bottom-2.5 left-3 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-background/80 backdrop-blur-md border border-primary/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              <span class="font-mono text-[10px] text-on-surface font-semibold tracking-wider uppercase">Featured Blueprint</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5 pt-1">
+            <h3 class="font-headline text-base font-bold text-on-surface tracking-tight">
+              Agentic <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#BEF264] to-[#A3E635] drop-shadow-[0_0_10px_rgba(190,242,100,0.3)]">Workflows</span> &amp; Multi-Agent Orchestration
+            </h3>
+            <p class="font-body text-xs text-on-surface-variant line-clamp-2 leading-relaxed">
+              Explore autonomous task loops, LangGraph state management, and real-time reflection models powering next-generation agent swarms.
+            </p>
+          </div>
+
+          <div class="pt-2 flex items-center gap-2">
+            <button onclick="quickLogDirect('Agentic Workflows', 20)" class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-gradient-to-r from-primary-bright to-primary text-on-primary font-headline font-bold text-xs shadow-[0_0_18px_rgba(52,211,153,0.3)] active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[18px]">neurology</span>
+              <span>Launch Study Session</span>
+            </button>
+            <button onclick="toggleBookmark(this)" class="w-10 h-10 rounded-full bg-surface-container-high border border-surface-border text-on-surface flex items-center justify-center hover:bg-surface-bright hover:border-primary/30 active:scale-95 transition-colors">
+              <span class="material-symbols-outlined text-[19px] text-on-surface-variant hover:text-primary">bookmark_border</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Presets Session Module -->
+        <div class="rounded-2xl bg-surface-container p-space-md border border-surface-border-light shadow-md flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
+              <span class="font-headline text-sm font-semibold">Quick Session Presets</span>
+            </div>
+            <span class="font-mono text-[11px] text-on-surface-variant">Instant Sync</span>
+          </div>
+
+          <!-- Preset Topics -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <button class="topic-pill active px-3 py-1.5 rounded-xl bg-primary/15 border border-primary text-primary font-mono text-xs whitespace-nowrap shadow-[0_0_10px_rgba(52,211,153,0.15)] transition-all">
+              Agentic Workflows
+            </button>
+            <button class="topic-pill px-3 py-1.5 rounded-xl bg-surface-container-high border border-surface-border text-on-surface-variant hover:text-on-surface font-mono text-xs whitespace-nowrap transition-all">
+              LoRA &amp; QLoRA
+            </button>
+            <button class="topic-pill px-3 py-1.5 rounded-xl bg-surface-container-high border border-surface-border text-on-surface-variant hover:text-on-surface font-mono text-xs whitespace-nowrap transition-all">
+              RAG Hybrid Indexing
+            </button>
+            <button class="topic-pill px-3 py-1.5 rounded-xl bg-surface-container-high border border-surface-border text-on-surface-variant hover:text-on-surface font-mono text-xs whitespace-nowrap transition-all">
+              Transformers Math
+            </button>
+          </div>
+
+          <!-- Preset Time Increments -->
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="logPreset(15)" class="flex-1 py-2 rounded-xl bg-surface-container-high border border-surface-border hover:border-primary/40 hover:bg-surface-bright text-on-surface font-mono font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[15px] text-primary">add</span>
+              <span>+15m</span>
+            </button>
+            <button onclick="logPreset(30)" class="flex-1 py-2 rounded-xl bg-surface-container-high border border-surface-border hover:border-primary/40 hover:bg-surface-bright text-on-surface font-mono font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[15px] text-primary">add</span>
+              <span>+30m</span>
+            </button>
+            <button onclick="logPreset(45)" class="flex-1 py-2 rounded-xl bg-surface-container-high border border-surface-border hover:border-primary/40 hover:bg-surface-bright text-on-surface font-mono font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[15px] text-primary">add</span>
+              <span>+45m</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Toast inside module -->
+          <div id="quickLogSuccess" class="hidden flex items-center gap-2 text-primary font-mono text-xs bg-primary/15 border border-primary/30 px-3 py-2 rounded-xl shadow-[0_0_12px_rgba(52,211,153,0.2)]">
+            <span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+            <span id="quickLogMessage">Logged successfully!</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================== -->
+      <!-- TAB 2: ROADMAP QUEUE                       -->
+      <!-- ========================================== -->
+      <section id="tab-roadmap" class="tab-pane flex flex-col gap-space-md">
+        
+        <!-- Hero Status & Metric Glance -->
+        <div class="relative bg-surface-container border border-surface-border rounded-xl p-space-md shadow-[0_8px_24px_rgba(0,0,0,0.4)] overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="font-mono text-[10px] text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                Curriculum Path
+              </span>
+              <h2 class="font-headline text-xl text-on-surface mt-1 tracking-tight">
+                Q3 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">AI Architect</span> Journey
+              </h2>
+            </div>
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-[#BEF264]/40 shadow-[0_0_12px_rgba(190,242,100,0.2)]">
+              <span class="material-symbols-outlined text-[15px] text-[#BEF264] material-symbols-fill">all_inclusive</span>
+              <span class="font-mono text-[11px] text-[#BEF264] uppercase tracking-wider font-semibold">AI Synced</span>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center gap-3">
+            <div class="flex-1 bg-surface-container-lowest h-2.5 rounded-full overflow-hidden p-0.5 border border-surface-border">
+              <div id="curriculum-bar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-accent-mint rounded-full shadow-[0_0_10px_rgba(52,211,153,0.5)] transition-all duration-500" style="width: 58%;"></div>
+            </div>
+            <div class="flex items-center gap-1 shrink-0 font-mono text-xs text-emerald-300">
+              <span id="curriculum-done-count" class="text-white font-semibold">37</span><span class="text-on-surface-variant font-normal">/64 Done</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search & Filter Dock -->
+        <div class="relative w-full">
+          <div class="relative flex items-center bg-surface-container border border-surface-border rounded-full px-4 py-2.5 shadow-inner focus-within:border-primary/50 transition-colors">
+            <span class="material-symbols-outlined text-primary text-[20px] mr-2.5">psychology</span>
+            <input id="roadmapSearch" type="text" placeholder="Filter syllabus (e.g. 'LoRA', 'LangGraph', 'RAG')..." class="w-full bg-transparent font-body text-sm text-on-surface placeholder:text-outline focus:outline-none"/>
+            <button onclick="clearSearch()" class="flex items-center justify-center w-7 h-7 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-[17px]">close</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="w-full overflow-x-auto no-scrollbar flex items-center gap-2 py-0.5">
+          <button onclick="filterRoadmap('all', this)" class="category-pill active flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-headline text-xs font-semibold shrink-0 shadow-[0_0_14px_rgba(52,211,153,0.35)] transition-all">
+            <span>All Topics</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-emerald-950 text-emerald-200 text-[10px]">64</span>
+          </button>
+          <button onclick="filterRoadmap('genai', this)" class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-headline text-xs font-semibold shrink-0 transition-all">
+            <span>Generative AI</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">18</span>
+          </button>
+          <button onclick="filterRoadmap('agents', this)" class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-headline text-xs font-semibold shrink-0 transition-all">
+            <span>Agents &amp; Tooling</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">14</span>
+          </button>
+          <button onclick="filterRoadmap('rag', this)" class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-headline text-xs font-semibold shrink-0 transition-all">
+            <span>RAG &amp; Vector DBs</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">12</span>
+          </button>
+          <button onclick="filterRoadmap('mlops', this)" class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-headline text-xs font-semibold shrink-0 transition-all">
+            <span>MLOps &amp; Infra</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">10</span>
+          </button>
+        </div>
+
+        <!-- Section 1: In Progress -->
+        <div class="flex flex-col space-y-3 pt-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#34D399] animate-pulse"></div>
+              <h3 class="font-headline text-base text-on-surface font-bold">
+                In <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">Progress</span>
+              </h3>
+              <span class="px-2 py-0.5 rounded-full bg-surface-container border border-surface-border font-mono text-[10px] text-emerald-400 font-semibold tracking-wider uppercase">2 topics</span>
+            </div>
+          </div>
+
+          <!-- Active Card 1 -->
+          <div class="roadmap-card" data-category="genai" data-keywords="fine-tuning llama lora qlora quantized gpu causal loss">
+            <div class="relative bg-surface-container border border-surface-border hover:border-emerald-500/40 rounded-xl p-space-md shadow-md flex flex-col space-y-3 group transition-all overflow-hidden">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2.5 py-0.5 rounded-full bg-emerald-950/70 border border-[#BEF264]/40 text-[#BEF264] font-mono text-xs uppercase tracking-wider shadow-[0_0_8px_rgba(190,242,100,0.15)]">Generative AI</span>
+                  <span class="flex items-center gap-1 font-mono text-xs text-primary">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_#34D399]"></span> Active
+                  </span>
+                </div>
+                <button onclick="toggleCardDone(this)" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-primary/20 text-on-surface-variant hover:text-primary text-xs font-mono border border-surface-border transition-colors">
+                  Mark Done
+                </button>
+              </div>
+              <div class="flex flex-col">
+                <h4 class="font-headline text-base text-on-surface font-semibold">Fine-Tuning Llama 3 with <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">LoRA &amp; QLoRA</span></h4>
+                <p class="font-body text-xs text-on-surface-variant line-clamp-2 mt-1">Quantized low-rank adaptation pipelines on consumer GPU clusters with causal loss monitoring.</p>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap pt-0.5">
+                <span class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface text-xs font-mono">
+                  <span class="material-symbols-outlined text-[14px] text-accent-mint">article</span>
+                  <span>ArXiv: 2305.14314</span>
+                </span>
+                <span class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface text-xs font-mono">
+                  <span class="material-symbols-outlined text-[14px] text-primary">code</span>
+                  <span>GitHub / unsloth</span>
+                </span>
+              </div>
+              <div class="flex flex-col space-y-1.5 pt-1">
+                <div class="flex justify-between font-mono text-xs">
+                  <span class="text-on-surface-variant">Lab &amp; Notebook Progress</span>
+                  <span class="text-primary font-bold">65%</span>
+                </div>
+                <div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden border border-surface-border/80">
+                  <div class="h-full bg-gradient-to-r from-emerald-600 via-emerald-400 to-accent-mint rounded-full shadow-[0_0_8px_rgba(52,211,153,0.4)]" style="width: 65%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Card 2 -->
+          <div class="roadmap-card" data-category="rag" data-keywords="rag vector hybrid pinecone hnsw reranking bm25">
+            <div class="relative bg-surface-container border border-surface-border hover:border-emerald-500/40 rounded-xl p-space-md shadow-md flex flex-col space-y-3 group transition-all overflow-hidden">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2.5 py-0.5 rounded-full bg-secondary-container/80 border border-emerald-500/25 text-emerald-300 font-mono text-xs uppercase tracking-wider">RAG &amp; Vector</span>
+                  <span class="flex items-center gap-1 font-mono text-xs text-primary">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_#34D399]"></span> Active
+                  </span>
+                </div>
+                <button onclick="toggleCardDone(this)" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-primary/20 text-on-surface-variant hover:text-primary text-xs font-mono border border-surface-border transition-colors">
+                  Mark Done
+                </button>
+              </div>
+              <div class="flex flex-col">
+                <h4 class="font-headline text-base text-on-surface font-semibold">Hybrid Search: <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">Dense Vector + BM25</span></h4>
+                <p class="font-body text-xs text-on-surface-variant line-clamp-2 mt-1">Cross-encoder reranking, BM25 sparse keyword blending, and HNSW index tuning.</p>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap pt-0.5">
+                <span class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface text-xs font-mono">
+                  <span class="material-symbols-outlined text-[14px] text-accent-mint">menu_book</span>
+                  <span>Pinecone Docs: Hybrid</span>
+                </span>
+              </div>
+              <div class="flex flex-col space-y-1.5 pt-1">
+                <div class="flex justify-between font-mono text-xs">
+                  <span class="text-on-surface-variant">Retrieval Benchmarking</span>
+                  <span class="text-primary font-bold">40%</span>
+                </div>
+                <div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden border border-surface-border/80">
+                  <div class="h-full bg-gradient-to-r from-emerald-600 via-emerald-400 to-accent-mint rounded-full shadow-[0_0_8px_rgba(52,211,153,0.4)]" style="width: 40%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Up Next -->
+        <div class="flex flex-col space-y-3 pt-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">dynamic_form</span>
+              <h3 class="font-headline text-base text-on-surface font-bold">Up <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">Next</span></h3>
+              <span class="px-2 py-0.5 rounded-full bg-surface-container border border-surface-border font-mono text-[10px] text-on-surface-variant font-medium uppercase tracking-wider">3 topics</span>
+            </div>
+            <span class="font-mono text-[11px] text-on-surface-variant tracking-wide uppercase">Priority Backlog</span>
+          </div>
+
+          <!-- Backlog Item 1 -->
+          <div class="roadmap-card bg-surface-container border border-surface-border hover:border-emerald-500/35 rounded-xl p-space-md shadow-sm flex items-start justify-between gap-3 transition-colors" data-category="agents" data-keywords="langgraph stateful agent loops multi-turn checkpoints">
+            <div class="flex flex-col space-y-1.5 flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 border border-[#BEF264]/40 text-[#BEF264] font-mono text-[10px] tracking-wider uppercase font-semibold">Priority: High</span>
+                <span class="flex items-center gap-1 font-mono text-xs text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[14px] text-accent-mint">schedule</span> 3 hrs
+                </span>
+              </div>
+              <h4 class="font-headline text-sm text-on-surface font-semibold truncate">LangGraph &amp; Stateful Agent Loops</h4>
+              <p class="font-body text-xs text-on-surface-variant line-clamp-1">Multi-turn cycles, human-in-the-loop checkpoints, and memory checkpoints.</p>
+            </div>
+            <button onclick="quickLogDirect('LangGraph & Stateful Agents', 30)" class="shrink-0 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-colors">
+              <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+            </button>
+          </div>
+
+          <!-- Backlog Item 2 -->
+          <div class="roadmap-card bg-surface-container border border-surface-border hover:border-emerald-500/35 rounded-xl p-space-md shadow-sm flex items-start justify-between gap-3 transition-colors" data-category="genai" data-keywords="direct preference optimization dpo reward modeling alignment rlhf">
+            <div class="flex flex-col space-y-1.5 flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-surface-border text-accent-mint font-mono text-[10px] tracking-wider uppercase font-semibold">Priority: Med</span>
+                <span class="flex items-center gap-1 font-mono text-xs text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[14px] text-accent-mint">schedule</span> 2.5 hrs
+                </span>
+              </div>
+              <h4 class="font-headline text-sm text-on-surface font-semibold truncate">Direct Preference Optimization (DPO)</h4>
+              <p class="font-body text-xs text-on-surface-variant line-clamp-1">Eliminating reward modeling overhead in conversational alignment.</p>
+            </div>
+            <button onclick="quickLogDirect('Direct Preference Optimization', 30)" class="shrink-0 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-colors">
+              <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+            </button>
+          </div>
+
+          <!-- Backlog Item 3 -->
+          <div class="roadmap-card bg-surface-container border border-surface-border hover:border-emerald-500/35 rounded-xl p-space-md shadow-sm flex items-start justify-between gap-3 transition-colors" data-category="mlops" data-keywords="quantization awq gguf edge deployment runtime 4-bit">
+            <div class="flex flex-col space-y-1.5 flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 border border-[#BEF264]/40 text-[#BEF264] font-mono text-[10px] tracking-wider uppercase font-semibold">Priority: High</span>
+                <span class="flex items-center gap-1 font-mono text-xs text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[14px] text-accent-mint">schedule</span> 2 hrs
+                </span>
+              </div>
+              <h4 class="font-headline text-sm text-on-surface font-semibold truncate">Quantization Techniques (AWQ, GGUF)</h4>
+              <p class="font-body text-xs text-on-surface-variant line-clamp-1">4-bit activation awareness and cross-platform edge deployment runtime.</p>
+            </div>
+            <button onclick="quickLogDirect('Quantization (AWQ, GGUF)', 30)" class="shrink-0 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-colors">
+              <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 3: Mastered Recently (Collapsible) -->
+        <div class="flex flex-col pt-2">
+          <button onclick="toggleMasteredAccordion()" class="w-full bg-surface-container border border-surface-border rounded-xl p-space-md shadow-sm flex items-center justify-between hover:border-emerald-500/30 transition-colors">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[17px] material-symbols-fill">verified</span>
+              </div>
+              <span class="font-headline text-sm text-on-surface font-bold">Mastered Recently</span>
+              <span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-surface-border font-mono text-xs text-emerald-300 font-medium">2</span>
+            </div>
+            <span id="chevronMastered" class="material-symbols-outlined text-on-surface-variant transition-transform duration-200">expand_more</span>
+          </button>
+
+          <div id="masteredList" class="hidden flex flex-col space-y-2 mt-2">
+            <div class="bg-surface-container-low border border-surface-border/80 rounded-xl p-space-md flex items-start justify-between gap-3">
+              <div class="flex items-start gap-3 min-w-0">
+                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 material-symbols-fill">check_circle</span>
+                <div class="flex flex-col min-w-0">
+                  <h4 class="font-headline text-sm text-on-surface font-semibold truncate">Transformer Attention Mechanisms</h4>
+                  <p class="font-body text-xs text-on-surface-variant">Self-Attention, FlashAttention-2 &amp; RoPE relative embeddings</p>
+                  <div class="flex items-center gap-2 mt-1.5 font-mono text-[11px] text-outline">
+                    <span>Completed 2 days ago</span>
+                    <span>•</span>
+                    <span class="text-primary font-semibold">Quiz: 96%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-surface-container-low border border-surface-border/80 rounded-xl p-space-md flex items-start justify-between gap-3">
+              <div class="flex items-start gap-3 min-w-0">
+                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 material-symbols-fill">check_circle</span>
+                <div class="flex flex-col min-w-0">
+                  <h4 class="font-headline text-sm text-on-surface font-semibold truncate">Tokenization &amp; Byte-Pair Encoding</h4>
+                  <p class="font-body text-xs text-on-surface-variant">Tiktoken internals, special tokens &amp; vocabulary expansion</p>
+                  <div class="flex items-center gap-2 mt-1.5 font-mono text-[11px] text-outline">
+                    <span>Completed 5 days ago</span>
+                    <span>•</span>
+                    <span class="text-primary font-semibold">Quiz: 100%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================== -->
+      <!-- TAB 3: ANALYTICS & PROGRESS                -->
+      <!-- ========================================== -->
+      <section id="tab-analytics" class="tab-pane flex flex-col gap-space-md">
+        
+        <!-- Level Badge & XP Progress Block -->
+        <div class="relative overflow-hidden rounded-xl bg-surface-container-low border border-surface-border p-space-md shadow-lg">
+          <div class="absolute -top-14 -right-14 w-52 h-52 rounded-full bg-gradient-to-br from-primary/15 via-secondary/10 to-transparent blur-3xl pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col gap-space-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-space-xs">
+                <div class="w-9 h-9 rounded-full bg-secondary-container/80 border border-[#A3E635]/40 flex items-center justify-center text-[#BEF264] shadow-[0_0_14px_rgba(163,230,53,0.3)]">
+                  <span class="material-symbols-outlined text-[20px] material-symbols-fill">neurology</span>
+                </div>
+                <div class="flex flex-col ml-1">
+                  <span class="font-mono text-[11px] text-[#BEF264] font-semibold tracking-wider uppercase drop-shadow-[0_0_8px_rgba(190,242,100,0.3)]">TIER PROGRESSION</span>
+                  <span class="font-headline text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-on-surface via-primary to-[#BEF264]">Level 4: Neural Architect</span>
+                </div>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-0.5 rounded-full bg-[#BEF264]/10 border border-[#A3E635]/40 text-[#BEF264] font-semibold shadow-[0_0_10px_rgba(163,230,53,0.2)]">Top 4%</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 mt-1">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="text-on-surface-variant font-medium"><span id="analytics-xp-val" class="text-[#BEF264] font-bold">2,450</span> XP</span>
+                <span class="text-[#BEF264] font-semibold drop-shadow-[0_0_6px_rgba(190,242,100,0.25)]">3,000 XP to Level 5</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-surface-container-highest/80 overflow-hidden p-[1px] border border-surface-border/50">
+                <div id="analytics-xp-bar" class="h-full rounded-full bg-gradient-to-r from-secondary-container via-primary to-[#BEF264] shadow-[0_0_14px_rgba(163,230,53,0.5)] transition-all duration-700" style="width: 81.6%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Pair: Total Time & Consistency -->
+        <div class="grid grid-cols-2 gap-space-sm">
+          <div class="flex flex-col p-space-md rounded-xl bg-surface-container border border-surface-border shadow-md relative overflow-hidden group">
+            <div class="absolute -bottom-6 -right-6 w-20 h-20 rounded-full bg-primary/5 blur-xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider">TOTAL TIME</span>
+              <div class="w-6 h-6 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-1 mt-1">
+              <span id="stat-total-time" class="font-headline text-2xl text-on-surface font-bold tracking-tight">58.4</span>
+              <span class="font-mono text-xs text-primary font-semibold">hrs</span>
+            </div>
+            <div class="mt-2 flex items-center gap-1.5 font-mono text-[11px] text-primary">
+              <span class="material-symbols-outlined text-[14px]">trending_up</span>
+              <span class="text-on-surface-variant font-medium">+6.2h this week</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col p-space-md rounded-xl bg-surface-container border border-surface-border shadow-md relative overflow-hidden group">
+            <div class="absolute -bottom-6 -right-6 w-20 h-20 rounded-full bg-tertiary/5 blur-xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider">CONSISTENCY</span>
+              <div class="w-6 h-6 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[15px] text-primary">workspace_premium</span>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-1 mt-1">
+              <span id="stat-consistency" class="font-headline text-2xl text-on-surface font-bold tracking-tight">92%</span>
+              <span class="font-mono text-xs text-primary font-semibold">pace</span>
+            </div>
+            <div class="mt-2 flex items-center gap-1.5 font-mono text-[11px] text-primary">
+              <span class="material-symbols-outlined text-[14px] material-symbols-fill">bolt</span>
+              <span class="text-on-surface-variant font-medium">14 day active fire</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Heatmap -->
+        <div class="rounded-xl bg-surface-container border border-surface-border p-space-md shadow-md flex flex-col gap-space-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="font-headline text-sm text-on-surface font-semibold tracking-tight">Activity Heatmap</span>
+              <span class="font-body text-xs text-on-surface-variant">Last 12 weeks of synthesized learning</span>
+            </div>
+            <div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/60 border border-primary/30 text-primary font-mono text-[11px] font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_#34D399] animate-pulse"></span>
+              Active Today
+            </div>
+          </div>
+
+          <div class="flex justify-between px-1 text-on-surface-variant font-mono text-[10px]">
+            <span>Oct</span>
+            <span>Nov</span>
+            <span>Dec</span>
+            <span>Jan</span>
+          </div>
+
+          <!-- Heatmap Grid -->
+          <div class="overflow-x-auto pb-1">
+            <div id="heatmap-grid" class="grid grid-rows-7 grid-flow-col gap-1.5 min-w-[280px] w-full">
+              <!-- Dynamically rendered or pre-populated via JS -->
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <span class="font-mono text-[10px] text-on-surface-variant">Less focus</span>
+            <div class="flex items-center gap-1.5">
+              <span class="h-2.5 w-2.5 rounded-sm bg-surface-container-highest/40"></span>
+              <span class="h-2.5 w-2.5 rounded-sm bg-secondary-container/50 border border-primary/10"></span>
+              <span class="h-2.5 w-2.5 rounded-sm bg-secondary-container border border-primary/20"></span>
+              <span class="h-2.5 w-2.5 rounded-sm bg-primary-container"></span>
+              <span class="h-2.5 w-2.5 rounded-sm bg-primary shadow-[0_0_6px_rgba(52,211,153,0.5)]"></span>
+              <span class="h-2.5 w-2.5 rounded-sm bg-lime-accent shadow-[0_0_8px_rgba(190,242,100,0.7)]"></span>
+            </div>
+            <span class="font-mono text-[10px] text-primary">45m+ Deep flow</span>
+          </div>
+        </div>
+
+        <!-- Weekly Velocity Bar Chart -->
+        <div class="rounded-xl bg-surface-container border border-surface-border p-space-md shadow-md flex flex-col gap-space-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="font-headline text-sm font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-on-surface via-primary to-[#BEF264]">Daily Rhythm &amp; Velocity</span>
+              <span class="font-body text-xs text-on-surface-variant">Benchmark against 45-min daily goal</span>
+            </div>
+            <span class="font-mono text-xs px-2.5 py-0.5 rounded-full bg-[#BEF264]/10 border border-[#A3E635]/40 text-[#BEF264] font-semibold">5/7 Target Met</span>
+          </div>
+
+          <div class="relative w-full h-40 mt-2">
+            <!-- 45m Target Reference Line -->
+            <div class="absolute inset-x-0 top-12 flex items-center gap-2 pointer-events-none z-10">
+              <div class="w-full h-[1px] bg-primary/25 border-dashed border-t border-primary/40"></div>
+              <span class="font-mono text-[10px] text-primary whitespace-nowrap bg-surface-container px-1.5 py-0.5 rounded border border-primary/20">Goal (45m)</span>
+            </div>
+
+            <div class="w-full h-full flex items-end justify-between px-2 pb-6 pt-2">
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div class="relative w-6 rounded-t-full bg-gradient-to-t from-secondary-container via-primary-container to-primary transition-all duration-300 group-hover:brightness-125" style="height: 60%;" title="50m"></div>
+                <span class="font-mono text-xs text-on-surface-variant">M</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div class="relative w-6 rounded-t-full bg-gradient-to-t from-primary-container to-primary shadow-[0_0_10px_rgba(52,211,153,0.25)] transition-all duration-300 group-hover:brightness-125" style="height: 78%;" title="65m"></div>
+                <span class="font-mono text-xs text-on-surface-variant">T</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div class="relative w-6 rounded-t-full bg-surface-container-highest border border-surface-border transition-all duration-300 group-hover:brightness-125" style="height: 36%;" title="30m"></div>
+                <span class="font-mono text-xs text-on-surface-variant">W</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div class="relative w-6 rounded-t-full bg-gradient-to-t from-secondary via-primary to-accent-mint shadow-[0_0_14px_rgba(52,211,153,0.4)] transition-all duration-300 group-hover:brightness-125" style="height: 96%;" title="80m"></div>
+                <span class="font-mono text-xs text-on-surface font-semibold">T</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div class="relative w-6 rounded-t-full bg-gradient-to-t from-secondary-container via-primary-container to-primary transition-all duration-300 group-hover:brightness-125" style="height: 66%;" title="55m"></div>
+                <span class="font-mono text-xs text-on-surface-variant">F</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div class="relative w-6 rounded-t-full bg-gradient-to-t from-primary-container via-primary to-accent-mint shadow-[0_0_16px_rgba(167,243,208,0.45)] transition-all duration-300 group-hover:brightness-125" style="height: 100%;" title="90m"></div>
+                <span class="font-mono text-xs text-on-surface-variant">S</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+                <div id="velocity-today-bar" class="relative w-6 rounded-t-full bg-gradient-to-t from-secondary-container to-primary-container border border-primary/40 transition-all duration-300 group-hover:brightness-125" style="height: 48%;" title="40m"></div>
+                <span class="font-mono text-xs text-primary font-bold">S</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Domain Focus Breakdown -->
+        <div class="rounded-xl bg-surface-container border border-surface-border p-space-md shadow-md flex flex-col gap-space-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="font-headline text-sm text-on-surface font-semibold tracking-tight">Domain Focus Distribution</span>
+              <span class="font-body text-xs text-on-surface-variant">58.4 hours classified across neural topics</span>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-secondary-container/50 border border-primary/20 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[19px]">pie_chart</span>
+            </div>
+          </div>
+
+          <div class="w-full h-3 rounded-full flex overflow-hidden gap-0.5 bg-surface-container-highest p-[1px] border border-surface-border mt-1">
+            <div class="h-full bg-primary rounded-l-full shadow-[0_0_8px_rgba(52,211,153,0.4)]" style="width: 40%;" title="GenAI: 40%"></div>
+            <div class="h-full bg-secondary" style="width: 25%;" title="Agents: 25%"></div>
+            <div class="h-full bg-tertiary" style="width: 20%;" title="RAG: 20%"></div>
+            <div class="h-full bg-secondary-container rounded-r-full" style="width: 15%;" title="MLOps: 15%"></div>
+          </div>
+
+          <div class="flex flex-col gap-2 pt-1 text-xs">
+            <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/60 border border-surface-border/60">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_6px_rgba(52,211,153,0.6)]"></span>
+                <span class="font-headline font-semibold text-on-surface">Generative AI &amp; LLMs</span>
+              </div>
+              <span class="font-mono text-primary font-bold">40% <span class="text-on-surface-variant font-normal">(23.4h)</span></span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/60 border border-surface-border/60">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                <span class="font-headline font-semibold text-on-surface">Agentic Workflows</span>
+              </div>
+              <span class="font-mono text-secondary font-bold">25% <span class="text-on-surface-variant font-normal">(14.6h)</span></span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/60 border border-surface-border/60">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+                <span class="font-headline font-semibold text-on-surface">RAG &amp; Vector Databases</span>
+              </div>
+              <span class="font-mono text-tertiary font-bold">20% <span class="text-on-surface-variant font-normal">(11.7h)</span></span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/60 border border-surface-border/60">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-secondary-container border border-primary/30"></span>
+                <span class="font-headline font-semibold text-on-surface">MLOps &amp; Fine-Tuning</span>
+              </div>
+              <span class="font-mono text-on-surface-variant font-bold">15% <span class="font-normal">(8.7h)</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unlocked Milestones -->
+        <div class="rounded-xl bg-surface-container border border-surface-border p-space-md shadow-md flex flex-col gap-space-sm mb-2">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="font-headline text-sm font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-on-surface via-primary to-[#BEF264]">Unlocked Milestones</span>
+              <span class="font-body text-xs text-on-surface-variant">Breakthroughs &amp; habits</span>
+            </div>
+            <span class="font-mono text-xs text-[#BEF264] font-semibold px-2.5 py-0.5 rounded-full bg-[#BEF264]/10 border border-[#A3E635]/40">3 / 8 Total</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-space-xs pt-1">
+            <div class="flex flex-col items-center text-center p-space-sm rounded-lg bg-surface-container-low border border-[#A3E635]/30">
+              <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-secondary-container via-primary-container to-[#BEF264] flex items-center justify-center text-on-primary shadow-[0_0_16px_rgba(190,242,100,0.4)] border border-[#BEF264]/40 mb-1.5">
+                <span class="material-symbols-outlined text-[22px]">hourglass_top</span>
+              </div>
+              <span class="font-headline text-xs text-on-surface font-semibold leading-tight">First 50h</span>
+              <span class="font-mono text-[10px] text-[#BEF264] mt-0.5 font-semibold">Unlocked</span>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-space-sm rounded-lg bg-surface-container-low border border-surface-border">
+              <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-secondary-container to-primary flex items-center justify-center text-on-primary shadow-[0_0_14px_rgba(16,185,129,0.35)] border border-primary/40 mb-1.5">
+                <span class="material-symbols-outlined text-[22px] material-symbols-fill">local_fire_department</span>
+              </div>
+              <span class="font-headline text-xs text-on-surface font-semibold leading-tight">14d Streak</span>
+              <span class="font-mono text-[10px] text-tertiary mt-0.5 font-medium">Master</span>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-space-sm rounded-lg bg-surface-container-low border border-surface-border">
+              <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-secondary to-accent-mint flex items-center justify-center text-on-primary shadow-[0_0_14px_rgba(167,243,208,0.35)] border border-primary/40 mb-1.5">
+                <span class="material-symbols-outlined text-[22px]">terminal</span>
+              </div>
+              <span class="font-headline text-xs text-on-surface font-semibold leading-tight">Prompt V1</span>
+              <span class="font-mono text-[10px] text-secondary mt-0.5 font-medium">Synthesizer</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================== -->
+      <!-- TAB 4: ACTIVITY LOGS                       -->
+      <!-- ========================================== -->
+      <section id="tab-logs" class="tab-pane flex flex-col gap-space-md">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-headline text-xl font-bold text-on-surface">Study Session <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">Logs</span></h2>
+            <p class="font-body text-xs text-on-surface-variant">Live chronological feed of your cognitive sprints</p>
+          </div>
+          <button onclick="openLogModal()" class="px-3 py-1.5 rounded-full bg-primary/15 border border-primary/30 text-primary hover:bg-primary/25 text-xs font-mono font-semibold flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-[16px]">add</span>
+            <span>New Session</span>
+          </button>
+        </div>
+
+        <div id="logs-container" class="flex flex-col gap-2.5">
+          <!-- Session items loaded dynamically -->
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FLOATING BOTTOM NAVIGATION CAPSULE -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 pb-safe pointer-events-none">
+      <div class="px-gutter-mobile pb-space-sm pointer-events-auto max-w-md mx-auto">
+        <div class="relative h-16 rounded-full bg-surface-container/90 backdrop-blur-2xl border border-surface-border-light shadow-[0_8px_32px_rgba(0,0,0,0.7),0_0_24px_rgba(52,211,153,0.12)] flex items-center justify-between px-space-xs">
+          
+          <!-- Tab Today -->
+          <button onclick="switchTab('today')" id="nav-btn-today" class="nav-btn active flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full transition-colors text-primary">
+            <span class="material-symbols-outlined text-[22px]">timer</span>
+            <span class="font-headline font-semibold text-[11px] mt-0.5">Today</span>
+          </button>
+
+          <!-- Tab Roadmap -->
+          <button onclick="switchTab('roadmap')" id="nav-btn-roadmap" class="nav-btn flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full transition-colors text-on-surface-variant hover:text-on-surface">
+            <span class="material-symbols-outlined text-[22px]">alt_route</span>
+            <span class="font-headline font-semibold text-[11px] mt-0.5">Roadmap</span>
+          </button>
+
+          <!-- Center Quick-Add Action -->
+          <div class="flex items-center justify-center px-1">
+            <button onclick="openLogModal()" class="w-12 h-12 rounded-full bg-gradient-to-tr from-primary-bright via-primary to-secondary flex items-center justify-center shadow-[0_0_20px_rgba(52,211,153,0.45)] hover:shadow-[0_0_28px_rgba(52,211,153,0.7)] active:scale-95 transition-all text-on-primary min-w-[44px] min-h-[44px]">
+              <span class="material-symbols-outlined text-[24px]">add</span>
+            </button>
+          </div>
+
+          <!-- Tab Analytics -->
+          <button onclick="switchTab('analytics')" id="nav-btn-analytics" class="nav-btn flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full transition-colors text-on-surface-variant hover:text-on-surface">
+            <span class="material-symbols-outlined text-[22px]">monitoring</span>
+            <span class="font-headline font-semibold text-[11px] mt-0.5">Analytics</span>
+          </button>
+
+          <!-- Tab Logs -->
+          <button onclick="switchTab('logs')" id="nav-btn-logs" class="nav-btn flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full transition-colors text-on-surface-variant hover:text-on-surface">
+            <span class="material-symbols-outlined text-[22px]">edit_note</span>
+            <span class="font-headline font-semibold text-[11px] mt-0.5">Logs</span>
+          </button>
+
+        </div>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: FOCUS TIMER OVERLAY                 -->
+  <!-- ========================================== -->
+  <div id="focus-timer-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-surface-container border border-surface-border-light p-6 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+      <div class="absolute -top-16 -left-16 w-44 h-44 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <button onclick="closeFocusTimer()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+        <span>Deep Cognitive Sprint</span>
+      </div>
+
+      <!-- Preset Sprint Selector -->
+      <div class="flex items-center gap-2 mb-6">
+        <button onclick="setTimerDuration(15)" class="timer-mode-btn px-3 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant text-xs font-mono">15m</button>
+        <button onclick="setTimerDuration(25)" class="timer-mode-btn active px-3 py-1 rounded-full bg-primary/20 border border-primary text-primary text-xs font-mono font-bold">25m</button>
+        <button onclick="setTimerDuration(45)" class="timer-mode-btn px-3 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant text-xs font-mono">45m</button>
+      </div>
+
+      <!-- Circular Digital Display -->
+      <div class="relative w-48 h-48 flex items-center justify-center mb-6">
+        <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 120 120">
+          <circle class="text-surface-container-highest/60" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-width="6"></circle>
+          <circle id="modal-timer-circle" cx="60" cy="60" fill="none" r="52" stroke="#34D399" stroke-dasharray="326.7" stroke-dashoffset="0" stroke-linecap="round" stroke-width="6" class="transition-all duration-300"></circle>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span id="timer-display-digits" class="font-headline text-4xl text-on-surface font-extrabold tracking-tight">25:00</span>
+          <span id="timer-topic-label" class="font-mono text-xs text-primary mt-1">Agentic Workflows</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center gap-3 w-full">
+        <button id="timer-toggle-btn" onclick="toggleTimer()" class="flex-1 py-3 rounded-full bg-gradient-to-r from-primary-bright via-primary to-secondary text-on-primary font-headline font-bold text-sm shadow-[0_0_20px_rgba(52,211,153,0.35)] active:scale-95 transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+          <span id="timer-btn-text">Start Focus</span>
+        </button>
+        <button onclick="resetTimer()" class="w-12 h-12 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant hover:text-primary flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-[20px]">restart_alt</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: QUICK SESSION LOG (ADD NEW)         -->
+  <!-- ========================================== -->
+  <div id="quick-log-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-surface-container border border-surface-border-light p-6 shadow-2xl flex flex-col gap-4 relative overflow-hidden">
+      <div class="flex items-center justify-between border-b border-surface-border pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[20px]">add_circle</span>
+          <h3 class="font-headline text-base font-bold text-on-surface">Log Study Session</h3>
+        </div>
+        <button onclick="closeLogModal()" class="w-7 h-7 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="font-mono text-xs text-on-surface-variant">Syllabus Topic</label>
+        <select id="modal-log-topic" class="w-full bg-surface-container-high border border-surface-border rounded-xl px-3 py-2 text-on-surface font-body text-sm focus:border-primary focus:outline-none">
+          <option value="Agentic Workflows & Multi-Agent">Agentic Workflows &amp; Multi-Agent</option>
+          <option value="Fine-Tuning Llama 3 (LoRA/QLoRA)">Fine-Tuning Llama 3 (LoRA/QLoRA)</option>
+          <option value="Hybrid Search & Vector Indexing">Hybrid Search &amp; Vector Indexing</option>
+          <option value="LangGraph & Stateful Agent Loops">LangGraph &amp; Stateful Agent Loops</option>
+          <option value="Quantization (AWQ & GGUF)">Quantization (AWQ &amp; GGUF)</option>
+          <option value="Attention & Transformer Internals">Attention &amp; Transformer Internals</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="font-mono text-xs text-on-surface-variant">Session Duration</label>
+        <div class="grid grid-cols-4 gap-2">
+          <button type="button" onclick="selectModalDuration(15, this)" class="modal-dur-btn py-2 rounded-xl bg-surface-container-high border border-surface-border text-on-surface-variant text-xs font-mono">15m</button>
+          <button type="button" onclick="selectModalDuration(30, this)" class="modal-dur-btn active py-2 rounded-xl bg-primary/20 border border-primary text-primary text-xs font-mono font-bold">30m</button>
+          <button type="button" onclick="selectModalDuration(45, this)" class="modal-dur-btn py-2 rounded-xl bg-surface-container-high border border-surface-border text-on-surface-variant text-xs font-mono">45m</button>
+          <button type="button" onclick="selectModalDuration(60, this)" class="modal-dur-btn py-2 rounded-xl bg-surface-container-high border border-surface-border text-on-surface-variant text-xs font-mono">60m</button>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="font-mono text-xs text-on-surface-variant">Cognitive Key Takeaway (optional)</label>
+        <textarea id="modal-log-notes" rows="2" placeholder="e.g. Mastered cross-encoder reranking threshold..." class="w-full bg-surface-container-high border border-surface-border rounded-xl px-3 py-2 text-on-surface font-body text-xs focus:border-primary focus:outline-none resize-none"></textarea>
+      </div>
+
+      <button onclick="submitModalLog()" class="w-full py-3 rounded-full bg-gradient-to-r from-primary-bright via-primary to-secondary text-on-primary font-headline font-bold text-xs shadow-[0_0_18px_rgba(52,211,153,0.35)] active:scale-95 transition-all">
+        Sync &amp; Commit Session (+50 XP)
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION CORE -->
+  <script>
+    /* ================================================================
+       MindSync AI Tracker - Interactive Core Logic & Persistence
+       ================================================================ */
+    
+    // Application State
+    const AppState = {
+      todayMinutes: 35,
+      targetMinutes: 45,
+      streakDays: 14,
+      totalHours: 58.4,
+      xp: 2450,
+      activeTopic: "Agentic Workflows",
+      sessions: [
+        { id: 1, topic: "Agentic Workflows & Multi-Agent", duration: 35, time: "Today, 10:15 AM", xp: 50, notes: "Explored LangGraph stateful loops and recursive tools." },
+        { id: 2, topic: "Fine-Tuning Llama 3 (LoRA/QLoRA)", duration: 45, time: "Yesterday, 04:30 PM", xp: 75, notes: "Configured 4-bit NF4 quantized matrix adapters." },
+        { id: 3, topic: "Hybrid Search & Vector Indexing", duration: 30, time: "2 days ago", xp: 45, notes: "Benchmarked Reciprocal Rank Fusion on Pinecone." }
+      ],
+      activeTab: "today"
+    };
+
+    // Load from LocalStorage if available
+    function loadSavedState() {
+      try {
+        const saved = localStorage.getItem("mindsync_app_state");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          Object.assign(AppState, parsed);
+        }
+      } catch (e) {
+        console.warn("Storage load error:", e);
+      }
+      renderAllViews();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem("mindsync_app_state", JSON.stringify(AppState));
+      } catch (e) {
+        console.warn("Storage save error:", e);
+      }
+    }
+
+    // Tab Switching
+    function switchTab(tabId) {
+      AppState.activeTab = tabId;
+      document.querySelectorAll(".tab-pane").forEach(pane => pane.classList.remove("active"));
+      const targetPane = document.getElementById("tab-" + tabId);
+      if (targetPane) targetPane.classList.add("active");
+
+      // Update Navigation buttons
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.remove("text-primary");
+        btn.classList.add("text-on-surface-variant");
+      });
+      const activeNavBtn = document.getElementById("nav-btn-" + tabId);
+      if (activeNavBtn) {
+        activeNavBtn.classList.remove("text-on-surface-variant");
+        activeNavBtn.classList.add("text-primary");
+      }
+
+      // Update Subtitle
+      const subtitleMap = {
+        today: "Analytics • Today",
+        roadmap: "Curriculum • Roadmap",
+        analytics: "Performance • Biomarkers",
+        logs: "Activity • Feed"
+      };
+      document.getElementById("header-subtitle").textContent = subtitleMap[tabId] || "MindSync AI";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Render Gauges and UI
+    function renderAllViews() {
+      // 1. Daily Focus Gauge
+      const progressPercent = Math.min(100, Math.round((AppState.todayMinutes / AppState.targetMinutes) * 100));
+      const circumference = 314.159;
+      const offset = circumference - (circumference * progressPercent / 100);
+      
+      const gaugeCircle = document.getElementById("gauge-progress-circle");
+      if (gaugeCircle) gaugeCircle.style.strokeDashoffset = offset;
+
+      const gaugeMinutes = document.getElementById("gauge-minutes-text");
+      if (gaugeMinutes) {
+        gaugeMinutes.innerHTML = `${AppState.todayMinutes}<span class="font-mono text-sm text-on-surface-variant font-normal"> / ${AppState.targetMinutes}m</span>`;
+      }
+
+      const gaugePercent = document.getElementById("gauge-percentage-text");
+      if (gaugePercent) gaugePercent.textContent = `${progressPercent}% SYNCED`;
+
+      const remainingMins = Math.max(0, AppState.targetMinutes - AppState.todayMinutes);
+      const remainingLabel = document.getElementById("time-remaining-label");
+      if (remainingLabel) {
+        remainingLabel.textContent = remainingMins === 0 ? "Daily goal achieved! 🌟" : `${remainingMins} mins remaining`;
+      }
+
+      // 2. Streaks and XP
+      const streakCounter = document.getElementById("streak-counter");
+      if (streakCounter) streakCounter.textContent = AppState.streakDays;
+
+      const xpVal = document.getElementById("analytics-xp-val");
+      if (xpVal) xpVal.textContent = AppState.xp.toLocaleString();
+
+      const xpBar = document.getElementById("analytics-xp-bar");
+      if (xpBar) {
+        const xpPercent = Math.min(100, ((AppState.xp % 1000) / 1000) * 100);
+        xpBar.style.width = `${Math.max(20, xpPercent)}%`;
+      }
+
+      const statTotalTime = document.getElementById("stat-total-time");
+      if (statTotalTime) statTotalTime.textContent = AppState.totalHours.toFixed(1);
+
+      // 3. Render Heatmap Grid
+      renderHeatmap();
+
+      // 4. Render Logs
+      renderLogsList();
+    }
+
+    // Render Heatmap (7 rows x 12 columns)
+    function renderHeatmap() {
+      const container = document.getElementById("heatmap-grid");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const intensityClasses = [
+        "bg-surface-container-highest/40",
+        "bg-secondary-container/50 border border-primary/10",
+        "bg-secondary-container border border-primary/20",
+        "bg-primary-container",
+        "bg-primary shadow-[0_0_6px_rgba(52,211,153,0.3)]",
+        "bg-lime-accent shadow-[0_0_8px_rgba(190,242,100,0.7)]"
+      ];
+
+      // 84 days total (12 weeks * 7 days)
+      for (let i = 0; i < 84; i++) {
+        const cell = document.createElement("div");
+        cell.className = "h-3 w-3 rounded-sm transition-transform hover:scale-125 cursor-pointer ";
+        
+        let level = 0;
+        if (i === 82) {
+          level = 5; // Today active!
+          cell.classList.add("animate-pulse");
+        } else if (i > 70) {
+          level = (i % 4) + 1;
+        } else {
+          level = (i * 7) % 5;
+        }
+
+        cell.className += intensityClasses[level];
+        const mins = level === 0 ? 0 : level * 18;
+        cell.title = `Day ${i + 1}: ${mins} minutes logged`;
+        container.appendChild(cell);
+      }
+    }
+
+    // Render Logs List
+    function renderLogsList() {
+      const container = document.getElementById("logs-container");
+      if (!container) return;
+      container.innerHTML = "";
+
+      AppState.sessions.forEach(sess => {
+        const card = document.createElement("div");
+        card.className = "p-3.5 rounded-xl bg-surface-container border border-surface-border shadow-sm flex items-start justify-between gap-3";
+        card.innerHTML = `
+          <div class="flex items-start gap-3 min-w-0">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5">
+              <span class="material-symbols-outlined text-[18px]">neurology</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span class="font-headline text-sm font-semibold text-on-surface truncate">${sess.topic}</span>
+              <p class="font-body text-xs text-on-surface-variant line-clamp-1 mt-0.5">${sess.notes || 'Completed deep focus cycle.'}</p>
+              <div class="flex items-center gap-2 mt-1.5 font-mono text-[11px] text-outline">
+                <span class="text-primary font-semibold">+${sess.duration} mins</span>
+                <span>•</span>
+                <span>${sess.time}</span>
+              </div>
+            </div>
+          </div>
+          <span class="font-mono text-xs text-[#BEF264] px-2 py-0.5 rounded-full bg-[#BEF264]/10 border border-[#A3E635]/30 shrink-0 font-bold">
+            +${sess.xp} XP
+          </span>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Quick presets action
+    function logPreset(minutes) {
+      AppState.todayMinutes += minutes;
+      AppState.totalHours += (minutes / 60);
+      AppState.xp += (minutes * 2);
+
+      AppState.sessions.unshift({
+        id: Date.now(),
+        topic: AppState.activeTopic,
+        duration: minutes,
+        time: "Just now",
+        xp: minutes * 2,
+        notes: `Quick preset logged for ${AppState.activeTopic}`
+      });
+
+      saveState();
+      renderAllViews();
+
+      // Show toast
+      const toast = document.getElementById("quickLogSuccess");
+      const msg = document.getElementById("quickLogMessage");
+      if (toast && msg) {
+        msg.textContent = `Logged +${minutes}m to ${AppState.activeTopic}! (+${minutes * 2} XP)`;
+        toast.classList.remove("hidden");
+        setTimeout(() => toast.classList.add("hidden"), 3000);
+      }
+      playTone(520, 0.1);
+    }
+
+    function quickLogDirect(topic, minutes) {
+      AppState.activeTopic = topic;
+      logPreset(minutes);
+    }
+
+    // Preset Topic pills click
+    document.querySelectorAll(".topic-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".topic-pill").forEach(p => {
+          p.classList.remove("active", "bg-primary/15", "border-primary", "text-primary", "shadow-[0_0_10px_rgba(52,211,153,0.15)]");
+          p.classList.add("bg-surface-container-high", "border-surface-border", "text-on-surface-variant");
+        });
+        pill.classList.remove("bg-surface-container-high", "border-surface-border", "text-on-surface-variant");
+        pill.classList.add("active", "bg-primary/15", "border-primary", "text-primary", "shadow-[0_0_10px_rgba(52,211,153,0.15)]");
+        AppState.activeTopic = pill.textContent.trim();
+        saveState();
+      });
+    });
+
+    // Roadmap Accordion
+    function toggleMasteredAccordion() {
+      const list = document.getElementById("masteredList");
+      const icon = document.getElementById("chevronMastered");
+      if (list) {
+        list.classList.toggle("hidden");
+        if (icon) icon.classList.toggle("rotate-180");
+      }
+    }
+
+    // Roadmap Filter Pills
+    function filterRoadmap(category, btn) {
+      document.querySelectorAll(".category-pill").forEach(b => {
+        b.classList.remove("active", "bg-primary", "text-on-primary", "shadow-[0_0_14px_rgba(52,211,153,0.35)]");
+        b.classList.add("bg-surface-container", "border", "border-surface-border", "text-on-surface-variant");
+      });
+      btn.classList.remove("bg-surface-container", "border", "border-surface-border", "text-on-surface-variant");
+      btn.classList.add("active", "bg-primary", "text-on-primary", "shadow-[0_0_14px_rgba(52,211,153,0.35)]");
+
+      document.querySelectorAll(".roadmap-card").forEach(card => {
+        if (category === "all" || card.getAttribute("data-category") === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    // Search Syllabus filter
+    const searchInput = document.getElementById("roadmapSearch");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        document.querySelectorAll(".roadmap-card").forEach(card => {
+          const text = (card.textContent + " " + (card.getAttribute("data-keywords") || "")).toLowerCase();
+          card.style.display = text.includes(val) ? "block" : "none";
+        });
+      });
+    }
+
+    function clearSearch() {
+      if (searchInput) {
+        searchInput.value = "";
+        document.querySelectorAll(".roadmap-card").forEach(card => card.style.display = "block");
+      }
+    }
+
+    function toggleCardDone(btn) {
+      btn.textContent = btn.textContent.includes("Done") ? "Completed ✓" : "Mark Done";
+      btn.classList.toggle("bg-primary");
+      btn.classList.toggle("text-on-primary");
+      playTone(660, 0.12);
+    }
+
+    function toggleBookmark(btn) {
+      const icon = btn.querySelector(".material-symbols-outlined");
+      if (icon) {
+        if (icon.textContent === "bookmark_border") {
+          icon.textContent = "bookmark";
+          icon.classList.add("material-symbols-fill", "text-primary");
+        } else {
+          icon.textContent = "bookmark_border";
+          icon.classList.remove("material-symbols-fill", "text-primary");
+        }
+      }
+    }
+
+    // Modal Quick Log
+    let modalDuration = 30;
+    function openLogModal() {
+      document.getElementById("quick-log-modal").classList.remove("hidden");
+    }
+    function closeLogModal() {
+      document.getElementById("quick-log-modal").classList.add("hidden");
+    }
+    function selectModalDuration(dur, btn) {
+      modalDuration = dur;
+      document.querySelectorAll(".modal-dur-btn").forEach(b => {
+        b.classList.remove("active", "bg-primary/20", "border-primary", "text-primary", "font-bold");
+        b.classList.add("bg-surface-container-high", "border-surface-border", "text-on-surface-variant");
+      });
+      btn.classList.remove("bg-surface-container-high", "border-surface-border", "text-on-surface-variant");
+      btn.classList.add("active", "bg-primary/20", "border-primary", "text-primary", "font-bold");
+    }
+    function submitModalLog() {
+      const topic = document.getElementById("modal-log-topic").value;
+      const notes = document.getElementById("modal-log-notes").value;
+      AppState.todayMinutes += modalDuration;
+      AppState.totalHours += (modalDuration / 60);
+      AppState.xp += (modalDuration * 2);
+
+      AppState.sessions.unshift({
+        id: Date.now(),
+        topic: topic,
+        duration: modalDuration,
+        time: "Just now",
+        xp: modalDuration * 2,
+        notes: notes || "Deep session completed."
+      });
+
+      saveState();
+      renderAllViews();
+      closeLogModal();
+      playTone(587.33, 0.15);
+    }
+
+    // Focus Timer Overlay Logic
+    let timerTotalSecs = 25 * 60;
+    let timerRemaining = timerTotalSecs;
+    let timerInterval = null;
+    let isTimerRunning = false;
+
+    function openFocusTimer() {
+      document.getElementById("focus-timer-modal").classList.remove("hidden");
+    }
+    function closeFocusTimer() {
+      document.getElementById("focus-timer-modal").classList.add("hidden");
+      if (isTimerRunning) toggleTimer();
+    }
+    function setTimerDuration(mins) {
+      if (isTimerRunning) toggleTimer();
+      timerTotalSecs = mins * 60;
+      timerRemaining = timerTotalSecs;
+      document.querySelectorAll(".timer-mode-btn").forEach(b => {
+        b.classList.remove("active", "bg-primary/20", "border-primary", "text-primary", "font-bold");
+        b.classList.add("bg-surface-container-high", "border-surface-border", "text-on-surface-variant");
+      });
+      event.target.classList.remove("bg-surface-container-high", "border-surface-border", "text-on-surface-variant");
+      event.target.classList.add("active", "bg-primary/20", "border-primary", "text-primary", "font-bold");
+      updateTimerDisplay();
+    }
+    function toggleTimer() {
+      const btnText = document.getElementById("timer-btn-text");
+      const toggleBtn = document.getElementById("timer-toggle-btn");
+      if (!isTimerRunning) {
+        isTimerRunning = true;
+        btnText.textContent = "Pause Focus";
+        toggleBtn.querySelector(".material-symbols-outlined").textContent = "pause";
+        timerInterval = setInterval(() => {
+          if (timerRemaining > 0) {
+            timerRemaining--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            playChime();
+            logPreset(Math.round(timerTotalSecs / 60));
+            closeFocusTimer();
+          }
+        }, 1000);
+      } else {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        btnText.textContent = "Resume Focus";
+        toggleBtn.querySelector(".material-symbols-outlined").textContent = "play_arrow";
+      }
+    }
+    function resetTimer() {
+      if (isTimerRunning) toggleTimer();
+      timerRemaining = timerTotalSecs;
+      updateTimerDisplay();
+    }
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerRemaining / 60);
+      const secs = timerRemaining % 60;
+      document.getElementById("timer-display-digits").textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      
+      const circumference = 326.7;
+      const progress = (timerTotalSecs - timerRemaining) / timerTotalSecs;
+      const offset = circumference * (1 - progress);
+      document.getElementById("modal-timer-circle").style.strokeDashoffset = offset;
+    }
+
+    // Audio Feedback using Web Audio API
+    function playTone(freq, dur) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch (e) {}
+    }
+
+    function playChime() {
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+        setTimeout(() => playTone(freq, 0.25), idx * 160);
+      });
+    }
+
+    // Device View Toggle
+    const toggleFrameBtn = document.getElementById("toggle-frame-btn");
+    const frameLabel = document.getElementById("frame-label");
+    if (toggleFrameBtn) {
+      toggleFrameBtn.addEventListener("click", () => {
+        document.body.classList.toggle("device-view");
+        frameLabel.textContent = document.body.classList.contains("device-view") ? "Plein Écran" : "Vue Mobile";
+      });
+    }
+
+    // Export Data JSON
+    function downloadBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(AppState, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `mindsync_backup_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    // Initialize on launch
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSavedState();
+    });
+  </script>
+</body>
+</html>

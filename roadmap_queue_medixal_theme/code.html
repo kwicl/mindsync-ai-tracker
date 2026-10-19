@@ -1,0 +1,445 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-bright": "#1F2F23",
+        "surface-container": "#131C15",
+        "surface-container-high": "#19251C",
+        "surface-container-highest": "#213226",
+        "surface-container-low": "#0F1611",
+        "surface-container-lowest": "#080D0A",
+        background: "#0B100D",
+        surface: "#0B100D",
+        "surface-border": "#1E2E24",
+        "border-glow": "rgba(52, 211, 153, 0.16)",
+        primary: "#34D399",
+        "primary-container": "#10B981",
+        "on-primary": "#022415",
+        "on-primary-container": "#D1FAE5",
+        secondary: "#A7F3D0",
+        "secondary-container": "#143825",
+        "on-secondary": "#064E3B",
+        "on-secondary-container": "#6EE7B7",
+        tertiary: "#E6F4EA",
+        "tertiary-container": "#065F46",
+        "on-surface": "#F0FDF4",
+        "on-surface-variant": "#8EA696",
+        "outline": "#455E4E",
+        "outline-variant": "#1E2E24",
+        "accent-mint": "#A7F3D0",
+        "bio-emerald": "#10B981",
+        "bio-pulse": "#34D399"
+      },
+      borderRadius: {
+        DEFAULT: "0.75rem",
+        lg: "1.25rem",
+        xl: "1.75rem",
+        full: "9999px"
+      },
+      spacing: {
+        "gutter-mobile": "1rem",
+        "space-xl": "2.5rem",
+        "space-md": "1rem",
+        "space-sm": "0.5rem",
+        margin: "2rem",
+        "space-xs": "0.25rem",
+        gutter: "1.5rem",
+        "space-lg": "1.5rem",
+        "margin-mobile": "1rem"
+      },
+      fontFamily: {
+        "label-sm": ["Space Grotesk", "sans-serif"],
+        "body-sm": ["Inter", "sans-serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "headline-sm": ["Space Grotesk", "sans-serif"],
+        "label-md": ["Space Grotesk", "sans-serif"],
+        "body-lg": ["Inter", "sans-serif"],
+        "headline-md": ["Space Grotesk", "sans-serif"],
+        "title-md": ["Space Grotesk", "sans-serif"]
+      },
+      fontSize: {
+        "label-sm": ["11px", {lineHeight: "14px", letterSpacing: "0.06em", fontWeight: "600"}],
+        "label-md": ["12px", {lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "600"}],
+        "body-sm": ["12px", {lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "400"}],
+        "body-md": ["14px", {lineHeight: "22px", letterSpacing: "0em", fontWeight: "400"}],
+        "body-lg": ["15px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}],
+        "headline-sm": ["19px", {lineHeight: "26px", letterSpacing: "-0.02em", fontWeight: "600"}],
+        "title-md": ["15px", {lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "600"}]
+      }
+    }
+  }
+};
+</script><style>@layer base{html,body{width:100vw;min-height:100vh;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+      background-color: #0B100D;
+    }
+  </style></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary/20 flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-[#0B100D]/85 backdrop-blur-xl border-b border-[#1E2E24]/60"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap- space-sm gap-2.5 min-w-0"><div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-300 flex items-center justify-center p-0.5 shadow-[0_0_12px_rgba(52,211,153,0.35)]"><div class="w-full h-full rounded-full bg-[#0B100D] flex items-center justify-center"><span class="material-symbols-outlined text-[17px] text-primary" style="font-variation-settings: 'FILL' 1;">vital_signs</span></div></div><div class="flex flex-col truncate"><div class="flex items-center gap-1.5"><span class="font-headline-sm text-[16px] text-on-surface font-semibold tracking-tight truncate">MindSync AI</span><span class="text-[9px] font-label-sm tracking-wider uppercase px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">MEDIXAL</span></div><span class="font-label-sm text-[11px] text-on-surface-variant tracking-wider uppercase truncate">Roadmap &amp; Analytics</span></div></div><div class="flex items-center gap-2"><div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container border border-surface-border shadow-inner"><span class="material-symbols-outlined text-[15px] text-primary">local_fire_department</span><span class="font-label-md text-label-md text-emerald-200 font-semibold">14</span></div><a class="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container border border-surface-border hover:border-primary/40 transition-colors" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-accent-mint text-[18px]">person</span></a></div></div></header><main class="flex-1 w-full bg-surface pt-16 pb-28"><div class="flex flex-col w-full pb-10 space-y-4 px-gutter-mobile">
+<!-- Ambient Medixal Emerald Halo -->
+<div class="relative w-full">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-80 h-32 bg-emerald-500/10 blur-3xl pointer-events-none rounded-full"></div>
+<div class="absolute -top-6 right-2 w-40 h-28 bg-teal-400/10 blur-2xl pointer-events-none rounded-full"></div>
+</div>
+<!-- Hero Status & Metric Glance (Medixal Analytics Style) -->
+<div class="relative bg-surface-container border border-surface-border rounded-xl p-space-md shadow-[0_8px_24px_rgba(0,0,0,0.4)] overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+  Curriculum Path
+</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1 tracking-tight">Q3 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">AI Architect</span> Journey</h2>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-[#BEF264]/40 shadow-[0_0_12px_rgba(190,242,100,0.2)]"><span class="material-symbols-outlined text-[15px] text-[#BEF264]" style="font-variation-settings: 'FILL' 1;">all_inclusive</span><span class="font-label-sm text-[11px] text-[#BEF264] uppercase tracking-wider font-semibold">AI Synced</span></div>
+</div>
+<div class="mt-4 flex items-center gap-3">
+<div class="flex-1 bg-surface-container-lowest h-2.5 rounded-full overflow-hidden p-0.5 border border-surface-border">
+<div class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-accent-mint rounded-full shadow-[0_0_10px_rgba(52,211,153,0.5)]" style="width: 58%;"></div>
+</div>
+<div class="flex items-center gap-1 shrink-0 font-label-md text-emerald-300">
+<span class="text-white font-semibold">37</span><span class="text-on-surface-variant font-normal">/64 Done</span>
+</div>
+</div>
+</div>
+<!-- Search & AI Syllabus Query Dock -->
+<div class="relative w-full">
+<div class="relative flex items-center bg-surface-container border border-surface-border rounded-full px-4 py-2 shadow-inner focus-within:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary text-[20px] mr-2.5">psychology</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none" id="roadmapSearch" placeholder="Ask syllabus: 'Show agent reasoning' or filter..." type="text">
+<button class="flex items-center justify-center w-7 h-7 rounded-full bg-surface-container-high border border-surface-border text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[17px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Filter Pills (Scrollable) -->
+<div class="w-full overflow-x-auto no-scrollbar -mx-gutter-mobile px-gutter-mobile flex items-center gap-2 py-0.5">
+<button class="category-pill active flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shrink-0 shadow-[0_0_14px_rgba(52,211,153,0.35)] transition-all" data-filter="all">
+<span class="">All</span>
+<span class="px-1.5 py-0.2 rounded-full bg-emerald-950 text-emerald-200 text-[10px] font-semibold">64</span>
+</button>
+<button class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-label-md text-label-md shrink-0 transition-all" data-filter="foundations">
+<span class="">Foundations</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">12</span>
+</button>
+<button class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-label-md text-label-md shrink-0 transition-all" data-filter="genai">
+<span class="">Generative AI</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">18</span>
+</button>
+<button class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-label-md text-label-md shrink-0 transition-all" data-filter="agents">
+<span class="">Agents &amp; Tooling</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">14</span>
+</button>
+<button class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-label-md text-label-md shrink-0 transition-all" data-filter="mlops">
+<span class="">MLOps &amp; Systems</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">10</span>
+</button>
+<button class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container border border-surface-border text-on-surface-variant hover:text-emerald-200 font-label-md text-label-md shrink-0 transition-all" data-filter="ethics">
+<span class="">Ethics</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[10px]">10</span>
+</button>
+</div>
+<!-- SECTION 1: In Progress -->
+<div class="flex flex-col space-y-3 pt-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#34D399] animate-pulse"></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">In <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">Progress</span></h3>
+<span class="px-2 py-0.5 rounded-full bg-surface-container border border-surface-border font-label-sm text-[10px] text-emerald-400 font-semibold tracking-wider uppercase">2 topics</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[19px]">sort</span>
+</button>
+</div>
+<!-- Active Card 1 -->
+<div class="relative bg-surface-container border border-surface-border hover:border-emerald-500/40 rounded-xl p-space-md shadow-md flex flex-col space-y-3 group transition-all overflow-hidden">
+<!-- Glow hint -->
+<div class="absolute top-0 right-0 w-36 h-36 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-950/70 border border-[#BEF264]/40 text-[#BEF264] font-label-sm text-label-sm uppercase tracking-wider shadow-[0_0_8px_rgba(190,242,100,0.15)]">Generative AI</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_#34D399]"></span>
+            Active
+          </span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] cursor-grab active:cursor-grabbing text-outline hover:text-primary transition-colors">drag_indicator</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-title-md text-title-md text-on-surface font-semibold">Fine-Tuning Llama 3 with <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">LoRA &amp; QLoRA</span></h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">Quantized low-rank adaptation pipelines on consumer GPU clusters with causal loss monitoring.</p>
+</div>
+<!-- Resource link chips -->
+<div class="flex items-center gap-2 flex-wrap pt-0.5">
+<a class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface text-label-sm font-label-sm hover:border-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[14px] text-accent-mint">article</span>
+<span class="">ArXiv: 2305.14314</span>
+<span class="material-symbols-outlined text-[12px] opacity-60">north_east</span>
+</a>
+<a class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface text-label-sm font-label-sm hover:border-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[14px] text-primary">code</span>
+<span class="">GitHub / unsloth</span>
+<span class="material-symbols-outlined text-[12px] opacity-60">north_east</span>
+</a>
+</div>
+<!-- Progress Track -->
+<div class="flex flex-col space-y-1.5 pt-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant tracking-wide">Lab &amp; Notebook Progress</span>
+<span class="text-primary font-bold">65%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden border border-surface-border/80">
+<div class="h-full bg-gradient-to-r from-emerald-600 via-emerald-400 to-accent-mint rounded-full shadow-[0_0_8px_rgba(52,211,153,0.4)]" style="width: 65%;"></div>
+</div>
+</div>
+</div>
+<!-- Active Card 2 -->
+<div class="relative bg-surface-container border border-surface-border hover:border-emerald-500/40 rounded-xl p-space-md shadow-md flex flex-col space-y-3 group transition-all overflow-hidden">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container/80 border border-emerald-500/25 text-emerald-300 font-label-sm text-label-sm uppercase tracking-wider">Agents</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_#34D399]"></span>
+            Active
+          </span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] cursor-grab active:cursor-grabbing text-outline hover:text-primary transition-colors">drag_indicator</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-title-md text-title-md text-on-surface font-semibold">Fine-Tuning Llama 3 with <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">LoRA &amp; QLoRA</span></h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">Cross-encoder reranking, BM25 sparse keyword blending, and HNSW index tuning.</p>
+</div>
+<!-- Resource link chips -->
+<div class="flex items-center gap-2 flex-wrap pt-0.5">
+<a class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-surface-border text-on-surface text-label-sm font-label-sm hover:border-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[14px] text-accent-mint">menu_book</span>
+<span class="">Pinecone Docs: Hybrid</span>
+<span class="material-symbols-outlined text-[12px] opacity-60">north_east</span>
+</a>
+</div>
+<!-- Progress Track -->
+<div class="flex flex-col space-y-1.5 pt-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant tracking-wide">Retrieval Benchmarking</span>
+<span class="text-primary font-bold">40%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden border border-surface-border/80">
+<div class="h-full bg-gradient-to-r from-emerald-600 via-emerald-400 to-accent-mint rounded-full shadow-[0_0_8px_rgba(52,211,153,0.4)]" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Up Next / Priority Backlog -->
+<div class="flex flex-col space-y-3 pt-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">dynamic_form</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Up <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264]">Next</span></h3>
+<span class="px-2 py-0.5 rounded-full bg-surface-container border border-surface-border font-label-sm text-[10px] text-on-surface-variant font-medium uppercase tracking-wider">3 topics</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant tracking-wide uppercase">Sorted by Priority</span>
+</div>
+<!-- Backlog Item 1 -->
+<div class="bg-surface-container border border-surface-border hover:border-emerald-500/35 rounded-xl p-space-md shadow-sm flex items-start justify-between gap-3 transition-colors">
+<div class="flex flex-col space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-emerald-950/80 border border-[#BEF264]/40 text-[#BEF264] font-label-sm text-[10px] tracking-wider uppercase font-semibold shadow-[0_0_8px_rgba(190,242,100,0.2)]">Priority: High</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-accent-mint">schedule</span> 3 hrs
+          </span>
+</div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium truncate">LangGraph &amp; Stateful Agent Loops</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Multi-turn cycles, human-in-the-loop checkpoints, and memory checkpoints.</p>
+</div>
+<button class="shrink-0 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+</div>
+<!-- Backlog Item 2 -->
+<div class="bg-surface-container border border-surface-border hover:border-emerald-500/35 rounded-xl p-space-md shadow-sm flex items-start justify-between gap-3 transition-colors">
+<div class="flex flex-col space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-surface-border text-accent-mint font-label-sm text-[10px] tracking-wider uppercase font-semibold">Priority: Med</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-accent-mint">schedule</span> 2.5 hrs
+          </span>
+</div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium truncate">Direct Preference Optimization (DPO)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Eliminating reward modeling overhead in conversational alignment.</p>
+</div>
+<button class="shrink-0 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+</div>
+<!-- Backlog Item 3 -->
+<div class="bg-surface-container border border-surface-border hover:border-emerald-500/35 rounded-xl p-space-md shadow-sm flex items-start justify-between gap-3 transition-colors">
+<div class="flex flex-col space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-emerald-950/80 border border-[#BEF264]/40 text-[#BEF264] font-label-sm text-[10px] tracking-wider uppercase font-semibold shadow-[0_0_8px_rgba(190,242,100,0.2)]">Priority: High</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-accent-mint">schedule</span> 2 hrs
+          </span>
+</div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium truncate">Quantization Techniques (AWQ, GGUF)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">4-bit activation awareness and cross-platform edge deployment runtime.</p>
+</div>
+<button class="shrink-0 w-8 h-8 rounded-full bg-surface-container-high border border-surface-border flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- SECTION 3: Mastered Recently (Interactive Accordion) -->
+<div class="flex flex-col pt-2">
+<button class="w-full bg-surface-container border border-surface-border rounded-xl p-space-md shadow-sm flex items-center justify-between hover:border-emerald-500/30 transition-colors" id="toggleMastered">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[17px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Mastered Recently</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-surface-border font-label-sm text-label-sm text-emerald-300 font-medium">2</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200" id="chevronMastered">expand_more</span>
+</button>
+<div class="flex flex-col space-y-2 mt-2" id="masteredList">
+<!-- Mastered Card 1 -->
+<div class="bg-surface-container-low border border-surface-border/80 rounded-xl p-space-md flex items-start justify-between gap-3 opacity-95">
+<div class="flex items-start gap-3 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="flex flex-col min-w-0">
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium truncate">Transformer Attention Mechanisms</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Self-Attention, FlashAttention-2 &amp; RoPE relative embeddings</p>
+<div class="flex items-center gap-2 mt-1.5 font-label-sm text-label-sm text-outline">
+<span class="">Completed 2 days ago</span>
+<span class="">•</span>
+<span class="text-primary font-semibold">Quiz: 96%</span>
+</div>
+</div>
+</div>
+<button class="shrink-0 text-on-surface-variant hover:text-primary p-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+<!-- Mastered Card 2 -->
+<div class="bg-surface-container-low border border-surface-border/80 rounded-xl p-space-md flex items-start justify-between gap-3 opacity-95">
+<div class="flex items-start gap-3 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="flex flex-col min-w-0">
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium truncate">Tokenization &amp; Byte-Pair Encoding</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tiktoken internals, special tokens &amp; vocabulary expansion</p>
+<div class="flex items-center gap-2 mt-1.5 font-label-sm text-label-sm text-outline">
+<span class="">Completed 5 days ago</span>
+<span class="">•</span>
+<span class="text-primary font-semibold">Quiz: 100%</span>
+</div>
+</div>
+</div>
+<button class="shrink-0 text-on-surface-variant hover:text-primary p-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Syllabus Suggestion Pill (Medixal Bio-Copilot Style) -->
+<div class="relative rounded-xl p-space-md bg-gradient-to-r from-surface-container via-surface-container-high to-surface-container border border-surface-border overflow-hidden shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-950/90 border border-emerald-500/40 flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(52,211,153,0.25)]">
+<span class="material-symbols-outlined text-primary text-[20px]">neurology</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-label-sm text-[10px] text-emerald-300 font-semibold uppercase tracking-wider">Medixal Syllabus Copilot</span>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">Recommended: Add <strong class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-[#BEF264] font-semibold">Vision-Language Models (VLM)</strong> based on your interest in Llama 3.</p>
+</div>
+<button class="px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/35 text-emerald-200 font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all shrink-0 font-medium">
+        + Queue
+      </button>
+</div>
+</div>
+<!-- Floating Action Button: Add Custom Topic or Resource (Medixal Emerald Pill) -->
+<div class="fixed right-4 bottom-24 z-40">
+<button class="flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 text-on-primary font-semibold shadow-[0_0_22px_rgba(52,211,153,0.45)] hover:shadow-[0_0_28px_rgba(52,211,153,0.65)] active:scale-95 transition-all border border-emerald-300/40" id="openAddTopicModal">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-label-md text-label-md tracking-wide">Add Topic / URL</span>
+</button>
+</div>
+<!-- Micro Modal Sheet (Custom Add Topic) -->
+<div class="fixed inset-0 z-50 bg-[#080D0A]/80 backdrop-blur-md hidden flex items-end justify-center p-0" id="addTopicModal">
+<div class="w-full bg-[#131C15] border-t border-emerald-500/30 rounded-t-2xl p-space-lg shadow-2xl flex flex-col space-y-4 max-w-lg mx-auto">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bookmark_add</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Inject Topic or Syllabus URL</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="closeModal">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col space-y-3">
+<label class="font-label-sm text-label-sm text-emerald-300 uppercase tracking-wider">Resource Link or ArXiv DOI</label>
+<div class="flex items-center bg-surface-container border border-surface-border rounded-full px-3.5 py-2 focus-within:border-primary/50">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2">link</span>
+<input class="w-full bg-transparent text-on-surface text-body-md font-body-md placeholder:text-outline focus:outline-none" placeholder="https://arxiv.org/abs/... or github.com" type="url">
+</div>
+<label class="font-label-sm text-label-sm text-emerald-300 uppercase tracking-wider">Target Domain</label>
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="px-3.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">Generative AI</button>
+<button class="px-3.5 py-1 rounded-full bg-surface-container border border-surface-border text-on-surface-variant font-label-sm text-label-sm">Agents</button>
+<button class="px-3.5 py-1 rounded-full bg-surface-container border border-surface-border text-on-surface-variant font-label-sm text-label-sm">Foundations</button>
+<button class="px-3.5 py-1 rounded-full bg-surface-container border border-surface-border text-on-surface-variant font-label-sm text-label-sm">MLOps</button>
+</div>
+</div>
+<button class="w-full py-3.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 text-on-primary font-label-md text-label-md font-semibold tracking-wide shadow-[0_0_18px_rgba(52,211,153,0.35)] active:scale-98 transition-transform" id="submitTopic">
+        Parse &amp; Auto-Generate Curriculum
+      </button>
+</div>
+</div>
+</div>
+<script>
+  // Filter pills state
+  const pills = document.querySelectorAll('.category-pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => {
+        p.classList.remove('bg-primary', 'text-on-primary', 'shadow-[0_0_14px_rgba(52,211,153,0.35)]');
+        p.classList.add('bg-surface-container', 'border', 'border-surface-border', 'text-on-surface-variant');
+      });
+      pill.classList.remove('bg-surface-container', 'border', 'border-surface-border', 'text-on-surface-variant');
+      pill.classList.add('bg-primary', 'text-on-primary', 'shadow-[0_0_14px_rgba(52,211,153,0.35)]');
+    });
+  });
+
+  // Accordion toggle
+  const toggleMastered = document.getElementById('toggleMastered');
+  const masteredList = document.getElementById('masteredList');
+  const chevronMastered = document.getElementById('chevronMastered');
+
+  toggleMastered.addEventListener('click', () => {
+    masteredList.classList.toggle('hidden');
+    chevronMastered.classList.toggle('rotate-180');
+  });
+
+  // Modal interactions
+  const openModal = document.getElementById('openAddTopicModal');
+  const closeModal = document.getElementById('closeModal');
+  const modal = document.getElementById('addTopicModal');
+  const submitTopic = document.getElementById('submitTopic');
+
+  openModal.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  submitTopic.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none" data-active-classes="text-primary"><div class="px-gutter-mobile pb-space-sm pointer-events-auto"><div class="relative mx-auto max-w-md h-16 rounded-full bg-[#131C15]/90 border border-emerald-500/20 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.7),0_0_18px_rgba(52,211,153,0.12)] flex items-center justify-between px-space-xs"><a class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full text-on-surface-variant hover:text-emerald-300 transition-colors" data-path="today" href="#"><span class="material-symbols-outlined text-[22px]">timer</span><span class="font-label-sm text-[11px] mt-0.5">Today</span></a><a aria-current="page" class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full transition-colors text-primary" data-path="roadmap" href="#"><span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">alt_route</span><span class="font-label-sm text-[11px] mt-0.5 font-semibold">Roadmap</span></a><div class="flex items-center justify-center px-1"><a class="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 via-teal-400 to-accent-mint flex items-center justify-center shadow-[0_0_18px_rgba(52,211,153,0.5)] hover:shadow-[0_0_24px_rgba(52,211,153,0.7)] active:scale-95 transition-all text-on-primary min-w-[44px] min-h-[44px]" data-path="quick-log" href="#"><span class="material-symbols-outlined text-[24px]">add</span></a></div><a class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full text-on-surface-variant hover:text-emerald-300 transition-colors" data-path="analytics" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-sm text-[11px] mt-0.5">Analytics</span></a><a class="flex-1 flex flex-col items-center justify-center h-14 min-w-[44px] rounded-full text-on-surface-variant hover:text-emerald-300 transition-colors" data-path="logs" href="#"><span class="material-symbols-outlined text-[22px]">edit_note</span><span class="font-label-sm text-[11px] mt-0.5">Logs</span></a></div></div></nav>
+
+</body></html>
